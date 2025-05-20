@@ -1,0 +1,6 @@
+@UrbanTechInvoicing_HostAddress = http://localhost:5125
+
+GET {{UrbanTechInvoicing_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
