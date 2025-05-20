@@ -28,4 +28,4 @@
 ----
 #### TODO Add Postman Documentation
 #### TODO Add Project Screenshots
-## [Loom Video](TODO)
+## [Loom Video](https://www.loom.com/share/13d8743ff64f42359225c49ae64fe353?sid=a05b58e2-c454-4de4-bc26-610ec5af7fcc)
