@@ -92,8 +92,8 @@ namespace UrbanTechInvoicing.Data
                 {
                     InvoiceId = Guid.NewGuid(),
                     InvoiceNumber = "INV001",
-                    InvoiceDate = DateTime.Now,
-                    DueDate = DateTime.Now.AddDays(30),
+                    InvoiceDate = DateTime.UtcNow,
+                    DueDate = DateTime.UtcNow.AddDays(30),
                     InvoiceTotal = 1000.00m,
                     Status = Invoice.InvoiceStatus.Unpaid,
                  });
@@ -127,7 +127,7 @@ namespace UrbanTechInvoicing.Data
                 new Payments
                 {
                     PaymentId = Guid.NewGuid(),
-                    PaymentDate = DateTime.Now,
+                    PaymentDate = DateTime.UtcNow,
                     PaymentAmount = 1000.00m,
                     PaymentType = Models.Payments.PmtType.PayPal,
                 });

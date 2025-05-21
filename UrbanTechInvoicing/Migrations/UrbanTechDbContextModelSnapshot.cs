@@ -47,7 +47,7 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("a7d602d6-f325-43ac-ab22-6e7cf23ce852"),
+                            CustomerId = new Guid("51366f44-f09f-4d92-8a2e-56f6e9b82f19"),
                             EmailAddress = "customer1@email.com",
                             Name = "Robots Inc",
                             PhoneNumber = "1234567890"
@@ -60,10 +60,7 @@ namespace UrbanTechInvoicing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CustomerId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CustomerId2")
+                    b.Property<Guid?>("CustomerId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DueDate")
@@ -79,10 +76,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.Property<decimal>("InvoiceTotal")
                         .HasColumnType("numeric");
 
-                    b.Property<Guid?>("ProductId1")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ServiceId1")
+                    b.Property<Guid?>("ServiceId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Status")
@@ -90,22 +87,20 @@ namespace UrbanTechInvoicing.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
-                    b.HasIndex("CustomerId2");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1");
-
-                    b.HasIndex("ServiceId1");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Invoices");
 
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("4e25a828-9639-4109-a226-11611e780f3d"),
-                            DueDate = new DateTime(2025, 6, 19, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5089),
-                            InvoiceDate = new DateTime(2025, 5, 20, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5053),
+                            InvoiceId = new Guid("69d1928b-1a19-4a66-8fb6-7eb7754db204"),
+                            DueDate = new DateTime(2025, 6, 20, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1014),
+                            InvoiceDate = new DateTime(2025, 5, 21, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1012),
                             InvoiceNumber = "INV001",
                             InvoiceTotal = 1000.00m,
                             Status = 1
@@ -194,9 +189,9 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            PaymentId = new Guid("82e8cb71-a636-4003-903a-8de4fc0fab95"),
+                            PaymentId = new Guid("5818143c-83df-4072-ba90-22dfd68bc82b"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 5, 20, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5255),
+                            PaymentDate = new DateTime(2025, 5, 21, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1185),
                             PaymentType = 4
                         });
                 });
@@ -222,7 +217,7 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("c384ee28-8304-42f2-bcae-95c7cefb24b3"),
+                            ProductId = new Guid("395613b6-8dfe-4817-950c-66a97682ab6a"),
                             Description = "A robot that cleans your house.",
                             ProductName = "Robot Cleaner"
                         });
@@ -249,7 +244,7 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ServiceId = new Guid("88ee4aac-bcf3-47c1-b624-8b0705fffbb4"),
+                            ServiceId = new Guid("daa36c5e-18a7-4aed-8e60-c07e14a1b158"),
                             Description = "A service that cleans your house.",
                             ServiceName = "Cleaning Service"
                         });
@@ -259,27 +254,21 @@ namespace UrbanTechInvoicing.Migrations
                 {
                     b.HasOne("UrbanTechInvoicing.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId");
 
-                    b.HasOne("UrbanTechInvoicing.Models.Customer", "CustomerId")
+                    b.HasOne("UrbanTechInvoicing.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("CustomerId2");
+                        .HasForeignKey("ProductId");
 
-                    b.HasOne("UrbanTechInvoicing.Models.Product", "ProductId")
+                    b.HasOne("UrbanTechInvoicing.Models.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ProductId1");
-
-                    b.HasOne("UrbanTechInvoicing.Models.Service", "ServiceId")
-                        .WithMany()
-                        .HasForeignKey("ServiceId1");
+                        .HasForeignKey("ServiceId");
 
                     b.Navigation("Customer");
 
-                    b.Navigation("CustomerId");
+                    b.Navigation("Product");
 
-                    b.Navigation("ProductId");
-
-                    b.Navigation("ServiceId");
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("UrbanTechInvoicing.Models.InvoicePayments", b =>

@@ -75,32 +75,26 @@ namespace UrbanTechInvoicing.Migrations
                     DueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     InvoiceTotal = table.Column<decimal>(type: "numeric", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    CustomerId2 = table.Column<Guid>(type: "uuid", nullable: true),
-                    CustomerId1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    ProductId1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    ServiceId1 = table.Column<Guid>(type: "uuid", nullable: true)
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ServiceId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
                     table.ForeignKey(
-                        name: "FK_Invoices_Customers_CustomerId1",
-                        column: x => x.CustomerId1,
+                        name: "FK_Invoices_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId");
                     table.ForeignKey(
-                        name: "FK_Invoices_Customers_CustomerId2",
-                        column: x => x.CustomerId2,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId");
-                    table.ForeignKey(
-                        name: "FK_Invoices_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_Invoices_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId");
                     table.ForeignKey(
-                        name: "FK_Invoices_Services_ServiceId1",
-                        column: x => x.ServiceId1,
+                        name: "FK_Invoices_Services_ServiceId",
+                        column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "ServiceId");
                 });
@@ -185,27 +179,27 @@ namespace UrbanTechInvoicing.Migrations
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "CustomerId", "EmailAddress", "Name", "PhoneNumber" },
-                values: new object[] { new Guid("a7d602d6-f325-43ac-ab22-6e7cf23ce852"), "customer1@email.com", "Robots Inc", "1234567890" });
+                values: new object[] { new Guid("51366f44-f09f-4d92-8a2e-56f6e9b82f19"), "customer1@email.com", "Robots Inc", "1234567890" });
 
             migrationBuilder.InsertData(
                 table: "Invoices",
-                columns: new[] { "InvoiceId", "CustomerId1", "CustomerId2", "DueDate", "InvoiceDate", "InvoiceNumber", "InvoiceTotal", "ProductId1", "ServiceId1", "Status" },
-                values: new object[] { new Guid("4e25a828-9639-4109-a226-11611e780f3d"), null, null, new DateTime(2025, 6, 19, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5089), new DateTime(2025, 5, 20, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5053), "INV001", 1000.00m, null, null, 1 });
+                columns: new[] { "InvoiceId", "CustomerId", "DueDate", "InvoiceDate", "InvoiceNumber", "InvoiceTotal", "ProductId", "ServiceId", "Status" },
+                values: new object[] { new Guid("69d1928b-1a19-4a66-8fb6-7eb7754db204"), null, new DateTime(2025, 6, 20, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1014), new DateTime(2025, 5, 21, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1012), "INV001", 1000.00m, null, null, 1 });
 
             migrationBuilder.InsertData(
                 table: "Payments",
                 columns: new[] { "PaymentId", "PaymentAmount", "PaymentDate", "PaymentType" },
-                values: new object[] { new Guid("82e8cb71-a636-4003-903a-8de4fc0fab95"), 1000.00m, new DateTime(2025, 5, 20, 19, 51, 10, 454, DateTimeKind.Local).AddTicks(5255), 4 });
+                values: new object[] { new Guid("5818143c-83df-4072-ba90-22dfd68bc82b"), 1000.00m, new DateTime(2025, 5, 21, 1, 39, 29, 538, DateTimeKind.Utc).AddTicks(1185), 4 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "Description", "ProductName" },
-                values: new object[] { new Guid("c384ee28-8304-42f2-bcae-95c7cefb24b3"), "A robot that cleans your house.", "Robot Cleaner" });
+                values: new object[] { new Guid("395613b6-8dfe-4817-950c-66a97682ab6a"), "A robot that cleans your house.", "Robot Cleaner" });
 
             migrationBuilder.InsertData(
                 table: "Services",
                 columns: new[] { "ServiceId", "Description", "ServiceName" },
-                values: new object[] { new Guid("88ee4aac-bcf3-47c1-b624-8b0705fffbb4"), "A service that cleans your house.", "Cleaning Service" });
+                values: new object[] { new Guid("daa36c5e-18a7-4aed-8e60-c07e14a1b158"), "A service that cleans your house.", "Cleaning Service" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoicePayments_PaymentId",
@@ -218,24 +212,19 @@ namespace UrbanTechInvoicing.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_CustomerId1",
+                name: "IX_Invoices_CustomerId",
                 table: "Invoices",
-                column: "CustomerId1");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_CustomerId2",
+                name: "IX_Invoices_ProductId",
                 table: "Invoices",
-                column: "CustomerId2");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_ProductId1",
+                name: "IX_Invoices_ServiceId",
                 table: "Invoices",
-                column: "ProductId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Invoices_ServiceId1",
-                table: "Invoices",
-                column: "ServiceId1");
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoiceServices_ServiceId",
