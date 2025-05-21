@@ -24,8 +24,24 @@ namespace UrbanTechInvoicing.Data
             // Configure composite keys to be auto-generated
             modelBuilder.Entity<Invoice>()
                 .Property(i => i.InvoiceId)
-                .ValueGeneratedOnAdd(); 
-            
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Customer)
+                .WithMany()
+                .HasForeignKey(i => i.CustomerId);
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Product)
+                .WithMany()
+                .HasForeignKey(i => i.ProductId);
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Service)
+                .WithMany()
+                .HasForeignKey(i => i.ServiceId);
+
+
             modelBuilder.Entity<Customer>()
                 .Property(c => c.CustomerId)
                 .ValueGeneratedOnAdd();
