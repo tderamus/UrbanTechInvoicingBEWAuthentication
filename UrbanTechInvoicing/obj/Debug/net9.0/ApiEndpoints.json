@@ -1,0 +1,64 @@
+[
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.CustomerEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_0",
+    "RelativePath": "customers",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[UrbanTechInvoicing.Models.Customer, UrbanTechInvoicing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.CustomerEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_2",
+    "RelativePath": "customers",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customer",
+        "Type": "UrbanTechInvoicing.Models.Customer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.CustomerEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_1",
+    "RelativePath": "customers/{CustomerId}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CustomerId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
