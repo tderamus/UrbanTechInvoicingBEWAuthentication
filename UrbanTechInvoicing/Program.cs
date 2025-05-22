@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using UrbanTechInvoicing.Data;
-using UrbanTechInvoicing.Models;
+using UrbanTechInvoicing.Interfaces;
+using UrbanTechInvoicing.Services;
+using UrbanTechInvoicing.Repositories;
+using UrbanTechInvoicing.Endpoints;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,9 @@ builder.Services.AddDbContext<UrbanTechDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 // Add services to the container.
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,7 +39,7 @@ app.UseHttpsRedirection();
 
 
 
-
+app.MapCustomerEndpoints();
 app.Run();
 
 
