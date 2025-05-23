@@ -12,7 +12,7 @@ namespace UrbanTechInvoicing.Data
         public DbSet<InvoiceProduct> InvoiceProducts { get; set; }
         public DbSet<Payments> Payments { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Models.Service> Services { get; set; }
 
         public UrbanTechDbContext(DbContextOptions<UrbanTechDbContext> options)
             : base(options)
@@ -50,11 +50,16 @@ namespace UrbanTechInvoicing.Data
                 .Property(p => p.PaymentId)
                 .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<Payments>()
+                .Property(p => p.PaymentType)
+                .HasConversion<string>();
+
+
             modelBuilder.Entity<Product>()
                 .Property(p => p.ProductId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Service>()
+            modelBuilder.Entity<Models.Service>()
                 .Property(s => s.ServiceId)
                 .ValueGeneratedOnAdd();
 

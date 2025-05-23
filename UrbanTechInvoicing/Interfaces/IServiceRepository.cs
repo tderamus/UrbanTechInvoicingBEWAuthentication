@@ -4,10 +4,10 @@ namespace UrbanTechInvoicing.Interfaces
 {
     public interface IServiceRepository
     {
-        Task<IEnumerable<Service>> GetAllServicesAsync();
-        Task<Service> GetServiceByIdAsync(int id);
+        Task<IEnumerable<Models.Service>> GetAllServicesAsync();
+        Task<Service> GetServiceByIdAsync(Guid ServiceId);
         Task<Service> CreateServiceAsync(Service service);
-        Task<Service> UpdateServiceAsync(int id, Service service);
-        Task<bool> DeleteServiceAsync(int id);
+        Task<Service> UpdateServiceAsync(Guid ServiceId, Service service);
+        Task<Service> DeleteServiceAsync(Guid ServiceId);
     }
 }

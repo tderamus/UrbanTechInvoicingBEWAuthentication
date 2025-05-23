@@ -20,6 +20,10 @@ builder.Services.AddDbContext<UrbanTechDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IPaymentsRepository, PaymentsRepository>();
+builder.Services.AddScoped<IPaymentsService, PaymentsService>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -40,6 +44,8 @@ app.UseHttpsRedirection();
 
 
 app.MapCustomerEndpoints();
+app.MapPaymentsEndpoints();
+app.MapServiceEndpoints();
 app.Run();
 
 
