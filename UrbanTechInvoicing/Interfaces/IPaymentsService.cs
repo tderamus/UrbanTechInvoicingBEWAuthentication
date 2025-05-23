@@ -5,9 +5,9 @@ namespace UrbanTechInvoicing.Interfaces
     public interface IPaymentsService
     {
         Task<IEnumerable<Payments>> GetAllPaymentsAsync();
-        Task<Payments> GetPaymentByIdAsync(int id);
+        Task<Payments> GetPaymentByIdAsync(Guid PaymentId);
         Task<Payments> CreatePaymentAsync(Payments payment);
-        Task<Payments> UpdatePaymentAsync(int id, Payments payment);
-        Task<bool> DeletePaymentAsync(int id);
+        Task<Payments> UpdatePaymentAsync(Guid PaymentId, Payments payment);
+        Task<Payments> DeletePaymentAsync(Guid PaymentId);
     }
 }

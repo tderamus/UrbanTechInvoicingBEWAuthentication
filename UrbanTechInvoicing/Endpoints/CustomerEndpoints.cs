@@ -41,7 +41,28 @@ namespace UrbanTechInvoicing.Endpoints
                     return Results.NotFound();
                 }
                 await customerService.UpdateCustomerAsync(customer);
+                return Results.Ok(existingCustomer);
+            });
+
+            routes.MapDelete("/customers/{CustomerId}", async (Guid CustomerId, ICustomerService customerService) =>
+            {
+                var customer = await customerService.GetCustomerByIdAsync(CustomerId);
+                if (customer is null)
+                {
+                    return Results.NotFound();
+                }
+                await customerService.DeleteCustomerAsync(CustomerId);
                 return Results.NoContent();
+            });
+
+            routes.MapGet("/customers/search", async (string searchTerm, ICustomerService customerService) =>
+            {
+                if (string.IsNullOrWhiteSpace(searchTerm))
+                {
+                    return Results.BadRequest("Search term cannot be null or empty.");
+                }
+                var customers = await customerService.SearchCustomersAsync(searchTerm);
+                return Results.Ok(customers);
             });
         } 
     }
