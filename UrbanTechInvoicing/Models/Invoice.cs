@@ -26,12 +26,7 @@ namespace UrbanTechInvoicing.Models
         public required InvoiceStatus Status { get; set; } // e.g., Paid, Unpaid, Overdue
         public Guid? CustomerId { get; set; }
         public virtual Customer? Customer { get; set; } // Navigation property
-        public Guid? ProductId { get; set; }
-        public virtual Product? Product { get; set; } // Navigation property
-
-        public Guid? ServiceId { get; set; }
-        public virtual Service? Service { get; set; } // Navigation property
-
+       
         public virtual ICollection<InvoicePayments>? InvoicePayments { get; set; } // Navigation property
         public virtual ICollection<InvoiceService>? InvoiceServices { get; set; } // Navigation property
         public virtual ICollection<InvoiceProduct>? InvoiceProducts { get; set; } // Navigation property

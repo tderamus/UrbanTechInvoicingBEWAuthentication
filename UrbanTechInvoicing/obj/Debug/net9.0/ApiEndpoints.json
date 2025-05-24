@@ -244,6 +244,141 @@
     ]
   },
   {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_0",
+    "RelativePath": "products",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[UrbanTechInvoicing.Models.Product, UrbanTechInvoicing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_2",
+    "RelativePath": "products",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product",
+        "Type": "UrbanTechInvoicing.Models.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_1",
+    "RelativePath": "products/{ProductId}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_3",
+    "RelativePath": "products/{ProductId}",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "product",
+        "Type": "UrbanTechInvoicing.Models.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_4",
+    "RelativePath": "products/{ProductId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.ProductEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapProductEndpoints\u003Eb__0_5",
+    "RelativePath": "products/search",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchTerm",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[UrbanTechInvoicing.Models.Product, UrbanTechInvoicing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "UrbanTechInvoicing.Endpoints.ServiceEndpoints\u002B\u003C\u003Ec",
     "Method": "\u003CMapServiceEndpoints\u003Eb__0_0",
     "RelativePath": "services",

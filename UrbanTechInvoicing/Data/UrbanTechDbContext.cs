@@ -31,15 +31,15 @@ namespace UrbanTechInvoicing.Data
                 .WithMany()
                 .HasForeignKey(i => i.CustomerId);
 
-            modelBuilder.Entity<Invoice>()
-                .HasOne(i => i.Product)
-                .WithMany()
-                .HasForeignKey(i => i.ProductId);
+            //modelBuilder.Entity<Invoice>()
+            //    .HasOne(i => i.Product)
+            //    .WithMany()
+            //    .HasForeignKey(i => i.ProductId);
 
-            modelBuilder.Entity<Invoice>()
-                .HasOne(i => i.Service)
-                .WithMany()
-                .HasForeignKey(i => i.ServiceId);
+            //modelBuilder.Entity<Invoice>()
+            //    .HasOne(i => i.Service)
+            //    .WithMany()
+            //    .HasForeignKey(i => i.ServiceId);
 
 
             modelBuilder.Entity<Customer>()
