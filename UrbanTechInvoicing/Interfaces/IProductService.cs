@@ -5,9 +5,10 @@ namespace UrbanTechInvoicing.Interfaces
     public interface IProductService
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
-        Task<Product> GetProductByIdAsync(int id);
+        Task<Product> GetProductByIdAsync(Guid ProductId);
         Task<Product> CreateProductAsync(Product product);
-        Task<Product> UpdateProductAsync(int id, Product product);
-        Task<bool> DeleteProductAsync(int id);
+        Task<Product> UpdateProductAsync(Guid ProductId, Product product);
+        Task<Product> DeleteProductAsync(Guid ProductId);
+        Task<IEnumerable<Product>> GetProductsAsync(string searchTerm);
     }
 }

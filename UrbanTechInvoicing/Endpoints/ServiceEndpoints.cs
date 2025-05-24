@@ -53,7 +53,6 @@ namespace UrbanTechInvoicing.Endpoints
                 await serviceService.DeleteServiceAsync(ServiceId);
                 return Results.NoContent();
             });
-
         }   
     }
 }

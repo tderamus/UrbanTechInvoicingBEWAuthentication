@@ -22,6 +22,8 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IPaymentsRepository, PaymentsRepository>();
 builder.Services.AddScoped<IPaymentsService, PaymentsService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 
@@ -45,6 +47,7 @@ app.UseHttpsRedirection();
 
 app.MapCustomerEndpoints();
 app.MapPaymentsEndpoints();
+app.MapProductEndpoints();
 app.MapServiceEndpoints();
 app.Run();
 
