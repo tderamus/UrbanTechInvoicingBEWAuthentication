@@ -49,6 +49,11 @@ namespace UrbanTechInvoicing.Endpoints
                 await invoiceService.DeleteInvoiceAsync(InvoiceId);
                 return Results.NoContent();
             });
+
+            routes.MapGet("/invoices/total", async (IInvoiceService invoiceService) =>
+            {
+                return await invoiceService.GetTotalInvoicesAsync();
+            });
         }
     }
 }

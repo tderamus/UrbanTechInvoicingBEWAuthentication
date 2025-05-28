@@ -13,7 +13,12 @@ namespace UrbanTechInvoicing.Repositories
 
         public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
         {
-            return await _context.Invoices.ToListAsync();
+            return await _context.Invoices
+                .Include(i => i.Customer)
+                .Include(i => i.InvoicePayments)
+                .Include(i => i.InvoiceServices)
+                .Include(i => i.InvoiceProducts)
+                .ToListAsync();
         }
 
         public async Task<Invoice> GetInvoiceByIdAsync(Guid InvoiceId)
@@ -51,8 +56,11 @@ namespace UrbanTechInvoicing.Repositories
             if (existingInvoice != null)
             {
                 existingInvoice.CustomerId = invoice.CustomerId;
+                existingInvoice.InvoiceNumber = invoice.InvoiceNumber;
                 existingInvoice.InvoiceDate = invoice.InvoiceDate;
+                existingInvoice.DueDate = invoice.DueDate;
                 existingInvoice.InvoiceTotal = invoice.InvoiceTotal;
+                existingInvoice.Status = invoice.Status;
                 existingInvoice.InvoicePayments = invoice.InvoicePayments;
                 existingInvoice.InvoiceServices = invoice.InvoiceServices;
                 existingInvoice.InvoiceProducts = invoice.InvoiceProducts;
@@ -80,5 +88,5 @@ namespace UrbanTechInvoicing.Repositories
             }
         }
     }
-    }
+}
 
