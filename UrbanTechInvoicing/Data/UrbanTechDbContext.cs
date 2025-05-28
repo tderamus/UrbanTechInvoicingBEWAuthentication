@@ -31,6 +31,10 @@ namespace UrbanTechInvoicing.Data
                 .WithMany()
                 .HasForeignKey(i => i.CustomerId);
 
+            modelBuilder.Entity<Invoice>()
+                .Property(i => i.Status)
+                .HasConversion<string>();
+
             //modelBuilder.Entity<Invoice>()
             //    .HasOne(i => i.Product)
             //    .WithMany()
@@ -136,9 +140,6 @@ namespace UrbanTechInvoicing.Data
                     PaymentAmount = 1000.00m,
                     PaymentType = Models.Payments.PmtType.PayPal,
                 });
-
-
-
         }
     }
 }
