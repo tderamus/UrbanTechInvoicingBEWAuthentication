@@ -281,6 +281,72 @@
         }
       }
     },
+    "/invoices/{InvoiceId}/products": {
+      "post": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "parameters": [
+          {
+            "name": "InvoiceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/invoices/{InvoiceId}/payments": {
+      "post": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "parameters": [
+          {
+            "name": "InvoiceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicePayments"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/payments": {
       "get": {
         "tags": [
@@ -773,6 +839,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "invoice": {
             "$ref": "#/components/schemas/Invoice"
           },
@@ -875,6 +945,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "paymentAmount": {
             "type": "number",
             "format": "double"
@@ -885,6 +959,9 @@
           },
           "paymentType": {
             "$ref": "#/components/schemas/PmtType"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/Invoice"
           }
         },
         "additionalProperties": false

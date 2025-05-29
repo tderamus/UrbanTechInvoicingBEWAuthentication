@@ -76,16 +76,9 @@ namespace UrbanTechInvoicing.Repositories
         public Task<Invoice> DeleteInvoiceAsync(Guid InvoiceId)
         {
             var invoice = _context.Invoices.Find(InvoiceId);
-            if (invoice != null)
-            {
-                _context.Invoices.Remove(invoice);
-                _context.SaveChanges();
-                return Task.FromResult(invoice);
-            }
-            else
-            {
-                throw new InvalidOperationException($"Invoice with ID {InvoiceId} not found.");
-            }
+            _context.Invoices.Remove(invoice);
+            _context.SaveChanges();
+            return Task.FromResult(invoice);
         }
     }
 }

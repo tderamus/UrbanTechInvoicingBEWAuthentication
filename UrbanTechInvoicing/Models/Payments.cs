@@ -22,8 +22,11 @@ namespace UrbanTechInvoicing.Models
 
         [Key]
         public Guid PaymentId { get; set; }
+        public Guid InvoiceId { get; set; } // Foreign key to Invoice
         public required decimal PaymentAmount { get; set; }
         public required DateTime PaymentDate { get; set; }
-        public required PmtType PaymentType { get; set; } // e.g., Cash, Credit Card, etc.
+        public required PmtType PaymentType { get; set; }
+        
+        public virtual Invoice? Invoice { get; set; } // Navigation property to Invoice
     }
 }
