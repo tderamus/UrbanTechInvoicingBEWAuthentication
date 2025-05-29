@@ -96,49 +96,67 @@ namespace UrbanTechInvoicing.Data
 
 
             // Add seed data for testing
+            var seedInvoiceId = Guid.NewGuid();
+            var seedCustomerId = Guid.NewGuid();
+            var seedProductId = Guid.NewGuid();
+            var seedServiceId = Guid.NewGuid();
+            var seedPaymentId = Guid.NewGuid();
+
             modelBuilder.Entity<Invoice>().HasData(
                 new Invoice
                 {
-                    InvoiceId = Guid.NewGuid(),
+                    InvoiceId = seedInvoiceId,
                     InvoiceNumber = "INV001",
                     InvoiceDate = DateTime.UtcNow,
                     DueDate = DateTime.UtcNow.AddDays(30),
                     InvoiceTotal = 1000.00m,
                     Status = Invoice.InvoiceStatus.Unpaid,
-                 });
+                    CustomerId = seedCustomerId
+                });
 
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
-                { 
-                    CustomerId = Guid.NewGuid(),
+                {
+                    CustomerId = seedCustomerId,
                     Name = "Robots Inc",
                     EmailAddress = "customer1@email.com",
-                    PhoneNumber = "1234567890",
-                    
+                    PhoneNumber = "1234567890"
                 });
+
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    ProductId = Guid.NewGuid(),
+                    ProductId = seedProductId,
                     ProductName = "Robot Cleaner",
-                    Description = "A robot that cleans your house.",
+                    Description = "A robot that cleans your house."
                 });
 
             modelBuilder.Entity<Service>().HasData(
-                new Service
+                new Models.Service
                 {
-                    ServiceId = Guid.NewGuid(),
+                    ServiceId = seedServiceId,
                     ServiceName = "Cleaning Service",
-                    Description = "A service that cleans your house.",
+                    Description = "A service that cleans your house."
                 });
 
             modelBuilder.Entity<Payments>().HasData(
                 new Payments
                 {
-                    PaymentId = Guid.NewGuid(),
+                    PaymentId = seedPaymentId,
+                    InvoiceId = seedInvoiceId,
                     PaymentDate = DateTime.UtcNow,
                     PaymentAmount = 1000.00m,
-                    PaymentType = Models.Payments.PmtType.PayPal,
+                    PaymentType = Models.Payments.PmtType.CreditCard,
+                });
+
+            // 🔗 Link the payment to the invoice via join table
+            modelBuilder.Entity<InvoicePayments>().HasData(
+                new InvoicePayments
+                {
+                    InvoiceId = seedInvoiceId,
+                    PaymentId = seedPaymentId,
+                    PaymentDate = DateTime.UtcNow,
+                    PaymentAmount = 1000.00m
                 });
         }
     }
