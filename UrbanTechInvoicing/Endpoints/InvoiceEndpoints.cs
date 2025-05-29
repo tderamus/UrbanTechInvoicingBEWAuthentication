@@ -54,6 +54,49 @@ namespace UrbanTechInvoicing.Endpoints
             {
                 return await invoiceService.GetTotalInvoicesAsync();
             });
+
+            // Add products to an invoice
+            routes.MapPost("/invoices/{InvoiceId}/products", async (
+                Guid InvoiceId, 
+                InvoiceProduct product, 
+                IInvoiceService invoiceService) =>
+            {
+                if (product is null)
+                {
+                    return Results.BadRequest("Product cannot be null.");
+                }
+                var invoice = await invoiceService.GetInvoiceByIdAsync(InvoiceId);
+                if (invoice is null)
+                {
+                    return Results.NotFound();
+                }
+                invoice.InvoiceProducts ??= new List<InvoiceProduct>();
+                invoice.InvoiceProducts.Add(product);
+                await invoiceService.UpdateInvoiceAsync(InvoiceId, invoice);
+                return Results.Ok(invoice);
+            });
+
+            // Add invoicepayments to an invoice and update invoice payment status
+            routes.MapPost("/invoices/{InvoiceId}/payments", async (
+                Guid InvoiceId,
+                InvoicePayments payment,
+                IInvoiceService invoiceService) =>
+            {
+                if (payment is null)
+                {
+                    return Results.BadRequest("Payment cannot be null.");
+                }
+                var invoice = await invoiceService.GetInvoiceByIdAsync(InvoiceId);
+                if (invoice is null)
+                {
+                    return Results.NotFound();
+                }
+                invoice.InvoicePayments ??= new List<InvoicePayments>();
+                invoice.InvoicePayments.Add(payment);
+                await invoiceService.UpdateInvoicePaymentAsync(InvoiceId, payment);
+                return Results.Ok(invoice);
+            });
+
         }
     }
 }

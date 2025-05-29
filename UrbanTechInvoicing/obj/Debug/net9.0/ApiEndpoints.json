@@ -245,6 +245,60 @@
   },
   {
     "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_7",
+    "RelativePath": "invoices/{InvoiceId}/payments",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InvoiceId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "payment",
+        "Type": "UrbanTechInvoicing.Models.InvoicePayments",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_6",
+    "RelativePath": "invoices/{InvoiceId}/products",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InvoiceId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "product",
+        "Type": "UrbanTechInvoicing.Models.InvoiceProduct",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
     "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_5",
     "RelativePath": "invoices/total",
     "HttpMethod": "GET",
