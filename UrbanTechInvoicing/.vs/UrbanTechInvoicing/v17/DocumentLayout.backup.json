@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\data\\urbantechdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:data\\urbantechdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\models\\invoicepayments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:models\\invoicepayments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\models\\payments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:models\\payments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\models\\invoiceproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:interfaces\\iinvoicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\data\\urbantechdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:data\\urbantechdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|d:\\workspace\\csharpprojects\\urbantechinvoicingbe\\urbantechinvoicing\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F44DF09-CC45-54B7-7F4C-40D045CD0683}|UrbanTechInvoicing.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,19 +67,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InvoicePayments.cs",
-              "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\InvoicePayments.cs",
-              "RelativeDocumentMoniker": "Models\\InvoicePayments.cs",
-              "ToolTip": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\InvoicePayments.cs",
-              "RelativeToolTip": "Models\\InvoicePayments.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABUAAAAAAAAAA==",
+              "Title": "Payments.cs",
+              "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\Payments.cs",
+              "RelativeDocumentMoniker": "Models\\Payments.cs",
+              "ToolTip": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\Payments.cs",
+              "RelativeToolTip": "Models\\Payments.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T03:14:35.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-29T04:27:01.511Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "InvoiceProduct.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\InvoiceProduct.cs",
               "RelativeDocumentMoniker": "Models\\InvoiceProduct.cs",
@@ -87,12 +86,11 @@
               "RelativeToolTip": "Models\\InvoiceProduct.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T02:11:48.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-29T02:11:48.807Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "IInvoiceRepository.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Interfaces\\IInvoiceRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IInvoiceRepository.cs",
@@ -100,12 +98,11 @@
               "RelativeToolTip": "Interfaces\\IInvoiceRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T00:03:36.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T00:03:36.076Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "InvoiceRepository.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Repositories\\InvoiceRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\InvoiceRepository.cs",
@@ -113,12 +110,11 @@
               "RelativeToolTip": "Repositories\\InvoiceRepository.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAIwEwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T23:42:56.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T23:42:56.597Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "InvoiceService.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Services\\InvoiceService.cs",
               "RelativeDocumentMoniker": "Services\\InvoiceService.cs",
@@ -126,31 +122,29 @@
               "RelativeToolTip": "Services\\InvoiceService.cs",
               "ViewState": "AgIAAFkAAAAAAAAAAAAAAFsAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T23:42:21.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T23:42:21.795Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Invoice.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\Invoice.cs",
               "RelativeDocumentMoniker": "Models\\Invoice.cs",
               "ToolTip": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Models\\Invoice.cs",
               "RelativeToolTip": "Models\\Invoice.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAswBYAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAwwBYAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T23:39:12.289Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T23:39:12.289Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "UrbanTechDbContext.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Data\\UrbanTechDbContext.cs",
               "RelativeDocumentMoniker": "Data\\UrbanTechDbContext.cs",
               "ToolTip": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Data\\UrbanTechDbContext.cs",
               "RelativeToolTip": "Data\\UrbanTechDbContext.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAI0AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAJEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T23:38:27.89Z",
               "EditorCaption": ""
@@ -169,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "InvoiceEndpoints.cs",
               "DocumentMoniker": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\Endpoints\\InvoiceEndpoints.cs",
               "RelativeDocumentMoniker": "Endpoints\\InvoiceEndpoints.cs",
@@ -177,8 +171,7 @@
               "RelativeToolTip": "Endpoints\\InvoiceEndpoints.cs",
               "ViewState": "AgIAAE0AAAAAAAAAAAAAAE4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T23:23:09.368Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T23:23:09.368Z"
             }
           ]
         }
