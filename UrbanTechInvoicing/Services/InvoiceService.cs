@@ -84,7 +84,68 @@ namespace UrbanTechInvoicing.Services
             }
             foreach (var product in products)
             {
-                invoice.InvoiceProducts.Add(product);
+                // Check if the product already exists in the invoice
+                var existingProduct = invoice.InvoiceProducts
+                    .FirstOrDefault(p => p.ProductId == product.ProductId);
+                if (existingProduct != null)
+                // Update the existing product's quantity and amount
+                {
+                    existingProduct.InvoiceQuantity += product.InvoiceQuantity;
+                    existingProduct.ProductLineAmount += product.ProductLineAmount;
+                    // Ensure the product line amount is recalculated correctly
+                    existingProduct.ProductLineAmount = existingProduct.ProductLineAmount * existingProduct.InvoiceQuantity;
+                    // Update ivoice total
+                    invoice.InvoiceTotal += product.ProductLineAmount * product.InvoiceQuantity;
+                }
+                else
+                // Add the new product to the invoice
+                {
+                    product.InvoiceId = invoiceId; // Ensure the product is linked to the invoice
+                    if (product.ProductLineAmount <= 0)
+                        throw new InvalidOperationException("Product line amount must be greater than zero.");
+                    if (product.InvoiceQuantity <= 0)
+                        throw new InvalidOperationException("Invoice quantity must be greater than zero.");
+
+                    invoice.InvoiceTotal += product.ProductLineAmount * product.InvoiceQuantity;
+                    invoice.InvoiceProducts ??= new List<InvoiceProduct>();
+                }
+                    invoice.InvoiceProducts.Add(product);
+            }
+            return await _invoiceRepository.UpdateInvoiceAsync(invoiceId, invoice);
+        }
+
+        public async Task<Invoice> AddServicesToInvoiceAsync(Guid invoiceId, IEnumerable<Models.InvoiceService> services)
+        {
+            var invoice = await _invoiceRepository.GetInvoiceByIdAsync(invoiceId);
+            if (invoice == null)
+            {
+                throw new InvalidOperationException($"Invoice with ID {invoiceId} not found.");
+            }
+            if (invoice.InvoiceServices == null)
+            {
+                invoice.InvoiceServices = new List<Models.InvoiceService>();
+            }
+            foreach (var service in services)
+            {
+                var existingService = invoice.InvoiceServices
+                    .FirstOrDefault(s => s.ServiceId == service.ServiceId);
+                if (existingService != null)
+                {
+                    existingService.InvoiceQuantity += service.InvoiceQuantity;
+                    existingService.ServiceLineAmount += service.ServiceLineAmount;
+                    existingService.ServiceLineAmount = existingService.ServiceLineAmount * existingService.InvoiceQuantity;
+                    invoice.InvoiceTotal += service.ServiceLineAmount * service.InvoiceQuantity;
+                }
+                else
+                {
+                    service.InvoiceId = invoiceId;
+                    if (service.ServiceLineAmount <= 0)
+                        throw new InvalidOperationException("Service line amount must be greater than zero.");
+                    if (service.InvoiceQuantity <= 0)
+                        throw new InvalidOperationException("Service quantity must be greater than zero.");
+                    invoice.InvoiceTotal += service.ServiceLineAmount * service.InvoiceQuantity;
+                    invoice.InvoiceServices.Add(service);
+                }
             }
             return await _invoiceRepository.UpdateInvoiceAsync(invoiceId, invoice);
         }

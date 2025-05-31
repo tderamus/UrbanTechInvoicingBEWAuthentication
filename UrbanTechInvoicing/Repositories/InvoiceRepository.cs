@@ -16,8 +16,11 @@ namespace UrbanTechInvoicing.Repositories
             return await _context.Invoices
                 .Include(i => i.Customer)
                 .Include(i => i.InvoicePayments)
+                    .ThenInclude(ip => ip.Payment)
                 .Include(i => i.InvoiceServices)
+                    .ThenInclude(ins => ins.Service)
                 .Include(i => i.InvoiceProducts)
+                    .ThenInclude(ip => ip.Product)
                 .ToListAsync();
         }
 
@@ -26,8 +29,11 @@ namespace UrbanTechInvoicing.Repositories
             var invoice = await _context.Invoices
                 .Include(i => i.Customer)
                 .Include(i => i.InvoicePayments)
+                    .ThenInclude(ip => ip.Payment)
                 .Include(i => i.InvoiceServices)
+                    .ThenInclude(ins => ins.Service)
                 .Include(i => i.InvoiceProducts)
+                    .ThenInclude(ip => ip.Product)
                 .FirstOrDefaultAsync(i => i.InvoiceId == InvoiceId);
 
             if (invoice == null)

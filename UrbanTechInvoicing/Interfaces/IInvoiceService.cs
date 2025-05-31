@@ -11,6 +11,7 @@ namespace UrbanTechInvoicing.Interfaces
         Task<Invoice> DeleteInvoiceAsync(Guid InvoiceId);
         Task<decimal> GetTotalInvoicesAsync();
         Task<Invoice> AddProductsToInvoiceAsync(Guid InvoiceId, IEnumerable<InvoiceProduct> products);
+        Task<Invoice> AddServicesToInvoiceAsync(Guid InvoiceId, IEnumerable<InvoiceService> services);
         Task<Invoice> UpdateInvoicePaymentAsync(Guid InvoiceId, InvoicePayments payment);
     }
 }
