@@ -90,9 +90,9 @@ namespace UrbanTechInvoicing.Data
                 .HasForeignKey(ip => ip.InvoiceId);
 
             modelBuilder.Entity<InvoiceService>()
-                .HasOne(ins => ins.Invoice)
-                .WithMany(i => i.InvoiceServices)
-                .HasForeignKey(ins => ins.InvoiceId);
+                .HasOne(ins => ins.Service)
+                .WithMany(s => s.InvoiceServices)
+                .HasForeignKey(ins => ins.ServiceId);
 
 
             // Add seed data for testing

@@ -334,10 +334,8 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Decimal",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "Type": "System.Void",
+        "MediaTypes": [],
         "StatusCode": 200
       }
     ]

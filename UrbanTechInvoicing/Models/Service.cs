@@ -8,5 +8,6 @@ namespace UrbanTechInvoicing.Models
         public Guid ServiceId { get; set; }
         public required string ServiceName { get; set; }
         public required string Description { get; set; }
+        public virtual ICollection<InvoiceService>? InvoiceServices { get; set; } // Navigation property for related InvoiceServices
     }
 }

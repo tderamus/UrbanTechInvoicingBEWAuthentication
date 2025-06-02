@@ -268,15 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "number",
-                  "format": "double"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -1056,6 +1048,13 @@
           },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "invoiceServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceService"
+            },
             "nullable": true
           }
         },
