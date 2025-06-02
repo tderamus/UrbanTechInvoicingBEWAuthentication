@@ -268,15 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "number",
-                  "format": "double"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -302,6 +294,39 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/InvoiceProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/invoices/{InvoiceId}/services": {
+      "post": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "parameters": [
+          {
+            "name": "InvoiceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceService"
               }
             }
           },
@@ -1023,6 +1048,13 @@
           },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "invoiceServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceService"
+            },
             "nullable": true
           }
         },

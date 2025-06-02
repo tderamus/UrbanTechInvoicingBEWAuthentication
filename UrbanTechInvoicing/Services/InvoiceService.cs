@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UrbanTechInvoicing.Services
 {
-    public class InvoiceService : IInvoiceService
+    public class InvoiceServices : IInvoiceService
     {
         private readonly IInvoiceRepository _invoiceRepository;
-        public InvoiceService(IInvoiceRepository invoiceRepository) => _invoiceRepository = invoiceRepository;
+        public InvoiceServices(IInvoiceRepository invoiceRepository) => _invoiceRepository = invoiceRepository;
 
         public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
         {
@@ -55,6 +55,13 @@ namespace UrbanTechInvoicing.Services
                 invoice.InvoiceTotal = 0;
             }
 
+            // Recalculate total from invoice services
+            if (invoice.InvoiceServices != null && invoice.InvoiceServices.Any())
+            {
+                invoice.InvoiceTotal += invoice.InvoiceServices
+                    .Sum(s => s.ServiceLineAmount * s.InvoiceQuantity);
+            }
+
             return await _invoiceRepository.UpdateInvoiceAsync(InvoiceId, invoice);
         }
 
@@ -84,8 +91,82 @@ namespace UrbanTechInvoicing.Services
             }
             foreach (var product in products)
             {
-                invoice.InvoiceProducts.Add(product);
+                var existingProduct = invoice.InvoiceProducts
+                    .FirstOrDefault(p => p.ProductId == product.ProductId);
+
+                if (existingProduct != null)
+                {
+                    existingProduct.InvoiceQuantity += product.InvoiceQuantity;
+                    existingProduct.ProductLineAmount += product.ProductLineAmount;
+                    existingProduct.ProductLineAmount = existingProduct.ProductLineAmount * existingProduct.InvoiceQuantity;
+                    invoice.InvoiceTotal += product.ProductLineAmount * product.InvoiceQuantity;
+                }
+                else
+                {
+                    product.InvoiceId = invoiceId;
+                    if (product.ProductLineAmount <= 0)
+                        throw new InvalidOperationException("Product line amount must be greater than zero.");
+                    if (product.InvoiceQuantity <= 0)
+                        throw new InvalidOperationException("Invoice quantity must be greater than zero.");
+
+                    invoice.InvoiceTotal += product.ProductLineAmount * product.InvoiceQuantity;
+                    invoice.InvoiceProducts.Add(product); 
+                }
             }
+
+            return await _invoiceRepository.UpdateInvoiceAsync(invoiceId, invoice);
+        }
+
+        public async Task<Invoice> AddServicesToInvoiceAsync(Guid invoiceId, IEnumerable<InvoiceService> services)
+        {
+            var invoice = await _invoiceRepository.GetInvoiceByIdAsync(invoiceId);
+            if (invoice == null)
+            {
+                throw new InvalidOperationException($"Invoice with ID {invoiceId} not found.");
+            }
+            if (invoice.InvoiceServices == null)
+            {
+                invoice.InvoiceServices = new List<InvoiceService>();
+            }
+            foreach (var service in services)
+            {
+                var existingService = invoice.InvoiceServices
+                    .FirstOrDefault(s => s.ServiceId == service.ServiceId);
+
+                if (existingService != null)
+                {
+                    if (service.ServiceLineAmount <= 0)
+                        throw new InvalidOperationException("Service line amount must be greater than zero.");
+                    if (service.InvoiceQuantity <= 0)
+                        throw new InvalidOperationException("Service quantity must be greater than zero.");
+
+                    existingService.InvoiceQuantity += service.InvoiceQuantity;
+
+                    // Assuming ServiceLineAmount is per-unit price
+                    existingService.ServiceLineAmount = service.ServiceLineAmount * existingService.InvoiceQuantity;
+
+                    invoice.InvoiceTotal += service.ServiceLineAmount * service.InvoiceQuantity;
+                }
+                else
+                {
+                    if (service.ServiceLineAmount <= 0)
+                        throw new InvalidOperationException("Service line amount must be greater than zero.");
+                    if (service.InvoiceQuantity <= 0)
+                        throw new InvalidOperationException("Service quantity must be greater than zero.");
+
+                    var newInvoiceService = new Models.InvoiceService
+                    {
+                        InvoiceId = invoiceId,
+                        ServiceId = service.ServiceId,
+                        InvoiceQuantity = service.InvoiceQuantity,
+                        ServiceLineAmount = service.ServiceLineAmount * service.InvoiceQuantity // Total line amount
+                    };
+
+                    invoice.InvoiceTotal += newInvoiceService.ServiceLineAmount;
+                    invoice.InvoiceServices.Add(newInvoiceService);
+                }
+            }
+
             return await _invoiceRepository.UpdateInvoiceAsync(invoiceId, invoice);
         }
 

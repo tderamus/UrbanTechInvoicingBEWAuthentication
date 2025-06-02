@@ -245,7 +245,7 @@
   },
   {
     "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_7",
+    "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_8",
     "RelativePath": "invoices/{InvoiceId}/payments",
     "HttpMethod": "POST",
     "IsController": false,
@@ -299,6 +299,33 @@
   },
   {
     "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_7",
+    "RelativePath": "invoices/{InvoiceId}/services",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InvoiceId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "service",
+        "Type": "UrbanTechInvoicing.Models.InvoiceService",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UrbanTechInvoicing.Endpoints.InvoiceEndpoints\u002B\u003C\u003Ec",
     "Method": "\u003CMapInvoiceEndpoints\u003Eb__0_5",
     "RelativePath": "invoices/total",
     "HttpMethod": "GET",
@@ -307,10 +334,8 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Decimal",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "Type": "System.Void",
+        "MediaTypes": [],
         "StatusCode": 200
       }
     ]
