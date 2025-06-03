@@ -27,5 +27,5 @@
 
 ----
 ## [Postman API Documentation](https://documenter.getpostman.com/view/36677652/2sB2qi6xDk)
-#### TODO Add Updated Loom Video for BE MVP
-## [Loom Video](https://www.loom.com/share/13d8743ff64f42359225c49ae64fe353?sid=a05b58e2-c454-4de4-bc26-610ec5af7fcc)
+## [Loom Video pt.1 - capstone proposal](https://www.loom.com/share/13d8743ff64f42359225c49ae64fe353?sid=a05b58e2-c454-4de4-bc26-610ec5af7fcc)
+## [Loom Vieo pt.2 - submitted MVP](https://www.loom.com/share/264120e0318040a2a69ec05df9286d25?sid=72fab78b-fac2-4a09-85a2-de5c0f4137e8)
