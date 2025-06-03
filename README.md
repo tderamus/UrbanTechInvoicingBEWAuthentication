@@ -27,5 +27,5 @@
 
 ----
 ## [Postman API Documentation](https://documenter.getpostman.com/view/36677652/2sB2qi6xDk)
-#### TODO Add Project Screenshots
+#### TODO Add Updated Loom Video for BE MVP
 ## [Loom Video](https://www.loom.com/share/13d8743ff64f42359225c49ae64fe353?sid=a05b58e2-c454-4de4-bc26-610ec5af7fcc)
