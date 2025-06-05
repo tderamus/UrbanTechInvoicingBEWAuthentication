@@ -7,7 +7,7 @@ namespace UrbanTechInvoicing.Interfaces
         Task<IEnumerable<Customer>> GetAllCustomersAsync();
         Task<Customer> GetCustomerByIdAsync(Guid CustomerId);
         Task CreateCustomerAsync(Customer customer);
-        Task UpdateCustomerAsync(Customer customer);
+        Task UpdateCustomerAsync(Guid customerId, Customer customer);
         Task DeleteCustomerAsync(Guid CustomerID);
         Task<IEnumerable<Customer>> SearchCustomersAsync(string searchTerm);
     }

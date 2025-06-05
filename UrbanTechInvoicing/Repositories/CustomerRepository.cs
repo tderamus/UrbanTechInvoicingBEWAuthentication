@@ -16,11 +16,12 @@ namespace UrbanTechInvoicing.Repositories
         }
         public async Task<Customer> GetCustomerByIdAsync(Guid CustomerId)
         {
-            if (CustomerId == null)
+            var customer = await _context.Customers.FindAsync(CustomerId);
+            if (customer == null)
             {
                 return (Customer)Results.BadRequest("Invalid customer ID.");
             }
-            var customer = await _context.Customers.FindAsync(CustomerId);
+            //var customer = await _context.Customers.FindAsync(CustomerId);
             if (customer == null)
             {
                 return (Customer)Results.NotFound("Customer not found.");

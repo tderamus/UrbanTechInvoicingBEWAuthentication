@@ -1,0 +1,8 @@
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_UrbanTechInvoicing.Tests
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_UrbanTechInvoicing.Tests
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.csproj.AssemblyReference.cache
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.AssemblyInfoInputs.cache
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.AssemblyInfo.cs
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.csproj.CoreCompileInputs.cache
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing.Tests\obj\Debug\net9.0\UrbanTechInvoicing.Tests.sourcelink.json

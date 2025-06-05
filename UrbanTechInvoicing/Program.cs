@@ -7,6 +7,7 @@ using UrbanTechInvoicing.Endpoints;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add configuration to read from user secrets when in development
 if (builder.Environment.IsDevelopment())
 {

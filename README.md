@@ -3,6 +3,7 @@
 # Project Summary:
 #### _UrbanTech Invoice application will be designed internally as a means of handling customer billing and payment activities. The invoice app will contain a list of customers, provide billing invoicing for products and services offered by Urban Tech, keep track of invoice statuses, and payment methods. The app will store transaction activities to summarize financial performance on a monthly and annual basis. To ensure integrity of data activities the application will enforce authentication and registration methods allowing activities to be segregated and tracked by the initiating user._ 
 ----
+## [Contributor - Toren DeRamus](https://github.com/tderamus)
 ## [Wireframe] Coming soon
 
 ## [ERD](https://dbdiagram.io/d/Invoice-Management-682292065b2fc4582f4b8e57)
