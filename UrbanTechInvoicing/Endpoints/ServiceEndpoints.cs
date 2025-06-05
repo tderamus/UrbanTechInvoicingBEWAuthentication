@@ -53,6 +53,48 @@ namespace UrbanTechInvoicing.Endpoints
                 await serviceService.DeleteServiceAsync(ServiceId);
                 return Results.NoContent();
             });
-        }   
+        }
+
+        public async static Task<IResult> GetAllServicesAsync(IServiceService serviceService)
+        {
+            var services = await serviceService.GetAllServicesAsync();
+            return Results.Ok(services);
+        }
+
+        public async static Task<IResult> CreateServiceAsync(Service service, IServiceService serviceService)
+        {
+            if (service is null)
+            {
+                return Results.BadRequest("Service cannot be null.");
+            }
+            await serviceService.CreateServiceAsync(service);
+            return Results.Created($"/services/{service.ServiceId}", service);
+        }
+
+        public async static Task<IResult> UpdateServiceAsync(Guid ServiceId, Service service, IServiceService serviceService)
+        {
+            if (service is null)
+            {
+                return Results.BadRequest("Service cannot be null.");
+            }
+            var existingService = await serviceService.GetServiceByIdAsync(ServiceId);
+            if (existingService is null)
+            {
+                return Results.NotFound();
+            }
+            await serviceService.UpdateServiceAsync(ServiceId, service);
+            return Results.Ok(existingService);
+        }
+
+        public async static Task<IResult> DeleteServiceAsync(Guid ServiceId, IServiceService serviceService)
+        {
+            var service = await serviceService.GetServiceByIdAsync(ServiceId);
+            if (service is null)
+            {
+                return Results.NotFound();
+            }
+            await serviceService.DeleteServiceAsync(ServiceId);
+            return Results.NoContent();
+        }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanTechInvoicing", "UrbanTechInvoicing.csproj", "{4F44DF09-CC45-54B7-7F4C-40D045CD0683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanTechInvoicingTests", "..\UrbanTechInvoicingTests\UrbanTechInvoicingTests.csproj", "{4AB030E1-21ED-4E6F-A5BE-45E8A5538D22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanTechInvoicing.Tests", "..\UrbanTechInvoicing.Tests\UrbanTechInvoicing.Tests.csproj", "{D221F21E-9D6A-4081-9CFD-7F9026A92F8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4F44DF09-CC45-54B7-7F4C-40D045CD0683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F44DF09-CC45-54B7-7F4C-40D045CD0683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F44DF09-CC45-54B7-7F4C-40D045CD0683}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AB030E1-21ED-4E6F-A5BE-45E8A5538D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AB030E1-21ED-4E6F-A5BE-45E8A5538D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AB030E1-21ED-4E6F-A5BE-45E8A5538D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AB030E1-21ED-4E6F-A5BE-45E8A5538D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D221F21E-9D6A-4081-9CFD-7F9026A92F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D221F21E-9D6A-4081-9CFD-7F9026A92F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D221F21E-9D6A-4081-9CFD-7F9026A92F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D221F21E-9D6A-4081-9CFD-7F9026A92F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -63,5 +63,46 @@ namespace UrbanTechInvoicing.Endpoints
                 return await productService.GetProductsAsync(searchTerm);
             });
         }
+
+        public static async Task<IResult> GetAllProductsAsync(IProductService productService)
+        {
+            return TypedResults.Ok(await productService.GetAllProductsAsync());
+        }
+
+        public static async Task<IResult> CreateProductAsync(Product product, IProductService productService)
+        {
+            if (product is null)
+            {
+                return Results.BadRequest("Product cannot be null.");
+            }
+            await productService.CreateProductAsync(product);
+            return Results.Created($"/products/{product.ProductId}", product);
+        }
+
+        public static async Task<IResult> UpdateProductAsync(Guid ProductId, Product product, IProductService productService)
+        {
+            if (product is null)
+            {
+                return Results.BadRequest("Product cannot be null.");
+            }
+            var existingProduct = await productService.GetProductByIdAsync(ProductId);
+            if (existingProduct is null)
+            {
+                return Results.NotFound();
+            }
+            await productService.UpdateProductAsync(ProductId, product);
+            return Results.Ok(existingProduct);
+        }
+
+        public static async Task<IResult> DeleteProductAsync(Guid ProductId, IProductService productService)
+        {
+            var product = await productService.GetProductByIdAsync(ProductId);
+            if (product is null)
+            {
+                return Results.NotFound();
+            }
+            await productService.DeleteProductAsync(ProductId);
+            return Results.Content($"ProductID {product.ProductId} has been deleted");
+        }
     }
 }

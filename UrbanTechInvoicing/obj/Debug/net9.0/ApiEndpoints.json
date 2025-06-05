@@ -41,15 +41,20 @@
   },
   {
     "ContainingType": "UrbanTechInvoicing.Endpoints.CustomerEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_1",
-    "RelativePath": "customers/{CustomerId}",
-    "HttpMethod": "GET",
+    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_3",
+    "RelativePath": "customers/{customerId}",
+    "HttpMethod": "PUT",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "CustomerId",
+        "Name": "customerId",
         "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "customer",
+        "Type": "UrbanTechInvoicing.Models.Customer",
         "IsRequired": true
       }
     ],
@@ -63,20 +68,15 @@
   },
   {
     "ContainingType": "UrbanTechInvoicing.Endpoints.CustomerEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_3",
+    "Method": "\u003CMapCustomerEndpoints\u003Eb__0_1",
     "RelativePath": "customers/{CustomerId}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
         "Name": "CustomerId",
         "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "customer",
-        "Type": "UrbanTechInvoicing.Models.Customer",
         "IsRequired": true
       }
     ],

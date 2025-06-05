@@ -20,9 +20,9 @@ namespace UrbanTechInvoicing.Services
         {
             await _customerRepository.CreateCustomerAsync(customer);
         }
-        public async Task UpdateCustomerAsync(Customer customer)
+        public async Task UpdateCustomerAsync(Guid customerId, Customer customer)
         {
-            await _customerRepository.UpdateCustomerAsync(customer.CustomerId, customer);
+            await _customerRepository.UpdateCustomerAsync(customerId, customer);
         }
         public async Task DeleteCustomerAsync(Guid CustomerID)
         {

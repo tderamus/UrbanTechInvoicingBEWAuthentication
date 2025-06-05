@@ -29,20 +29,21 @@ namespace UrbanTechInvoicing.Endpoints
                 return Results.Created($"/customers/{customer.CustomerId}", customer);
             });
 
-            routes.MapPut("/customers/{CustomerId}", async (Guid CustomerId, Customer customer, ICustomerService customerService) =>
-            {
-                if (customer is null)
+            routes.MapPut("/customers/{customerId}",
+                async (Guid customerId, Customer customer, ICustomerService customerService) =>
                 {
-                    return Results.BadRequest("Customer cannot be null.");
-                }
-                var existingCustomer = await customerService.GetCustomerByIdAsync(CustomerId);
-                if (existingCustomer is null)
-                {
-                    return Results.NotFound();
-                }
-                await customerService.UpdateCustomerAsync(customer);
-                return Results.Ok(existingCustomer);
-            });
+                    if (customer is null)
+                    {
+                        return Results.BadRequest("Customer cannot be null.");
+                    }
+                    var existingCustomer = await customerService.GetCustomerByIdAsync(customerId);
+                    if (existingCustomer is null)
+                    {
+                        return Results.NotFound();
+                    }
+                    await customerService.UpdateCustomerAsync(customerId, customer);
+                    return Results.Ok(existingCustomer);
+                });
 
             routes.MapDelete("/customers/{CustomerId}", async (Guid CustomerId, ICustomerService customerService) =>
             {
@@ -64,6 +65,48 @@ namespace UrbanTechInvoicing.Endpoints
                 var customers = await customerService.SearchCustomersAsync(searchTerm);
                 return Results.Ok(customers);
             });
-        } 
+        }
+
+        public static async Task<IResult> GetAllCustomers(ICustomerService customerService)
+        {
+            var customers = await customerService.GetAllCustomersAsync();
+            return Results.Ok(customers);
+        }
+
+        public static async Task<IResult> CreateCustomer(Customer customer, ICustomerService customerService)
+        {
+            if (customer is null)
+            {
+                return Results.BadRequest("Customer cannot be null.");
+            }
+            await customerService.CreateCustomerAsync(customer);
+            return Results.Created($"/customers/{customer.CustomerId}", customer);
+        }
+
+        public static async Task<IResult> UpdateCustomer(Guid customerId, Customer customer, ICustomerService customerService)
+        {
+            if (customer is null)
+            {
+                return Results.BadRequest("Customer cannot be null.");
+            }
+            var existingCustomer = await customerService.GetCustomerByIdAsync(customerId);
+            if (existingCustomer is null)
+            {
+                return Results.NotFound();
+            }
+            await customerService.UpdateCustomerAsync(customerId, customer);
+            return Results.Ok(existingCustomer);
+        }
+
+        public static async Task<IResult> DeleteCustomer(Guid CustomerId, ICustomerService customerService)
+        {
+            var customer = await customerService.GetCustomerByIdAsync(CustomerId);
+            if (customer is null)
+            {
+                return Results.NotFound();
+            }
+            await customerService.DeleteCustomerAsync(CustomerId);
+            return Results.NoContent();
+        }
     }
 }

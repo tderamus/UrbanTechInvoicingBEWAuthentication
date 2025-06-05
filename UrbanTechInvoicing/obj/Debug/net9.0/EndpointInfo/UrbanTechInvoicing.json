@@ -69,13 +69,36 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "tags": [
           "UrbanTechInvoicing"
         ],
         "parameters": [
           {
             "name": "CustomerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customers/{customerId}": {
+      "put": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
             "in": "path",
             "required": true,
             "schema": {
@@ -94,27 +117,6 @@
           },
           "required": true
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "UrbanTechInvoicing"
-        ],
-        "parameters": [
-          {
-            "name": "CustomerId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
