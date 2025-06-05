@@ -21,11 +21,28 @@ namespace UrbanTechInvoicing.Services
         }
         public async Task UpdateServiceAsync(Guid ServiceId, Service service)
         {
-            await _serviceRepository.UpdateServiceAsync(ServiceId, service);
+            var existing = await _serviceRepository.GetServiceByIdAsync(ServiceId);
+            if (existing is null)
+            {
+                throw new KeyNotFoundException($"Service with ID {ServiceId} not found.");
+            }
+
+            existing.ServiceName = service.ServiceName;
+            existing.Description = service.Description;
+
+            await _serviceRepository.UpdateServiceAsync(ServiceId, existing);
         }
+
         public async Task DeleteServiceAsync(Guid ServiceId)
         {
+            var existing = await _serviceRepository.GetServiceByIdAsync(ServiceId);
+            if (existing is null)
+            {
+                throw new KeyNotFoundException($"Service with ID {ServiceId} not found.");
+            }
+
             await _serviceRepository.DeleteServiceAsync(ServiceId);
         }
+
     }
 }
