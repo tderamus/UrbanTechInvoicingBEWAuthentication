@@ -6,7 +6,7 @@ using UrbanTechInvoicing.Interfaces;
 using UrbanTechInvoicing.Models;
 using Xunit;
 
-namespace UrbanTechInvoicingTests
+namespace UrbanTechInvoicing.Tests
 {
 
     public class CustomerServicesTests
