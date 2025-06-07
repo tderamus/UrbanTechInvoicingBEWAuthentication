@@ -74,8 +74,7 @@
               "RelativeToolTip": "Models\\Service.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T04:37:17.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T04:37:17.823Z"
             },
             {
               "$type": "Document",
@@ -87,8 +86,7 @@
               "RelativeToolTip": "Interfaces\\IServiceService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T04:37:26.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T04:37:26.57Z"
             },
             {
               "$type": "Document",
@@ -100,8 +98,7 @@
               "RelativeToolTip": "Services\\ServiceService.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAAACsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T04:36:21.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T04:36:21.414Z"
             },
             {
               "$type": "Document",
@@ -113,8 +110,7 @@
               "RelativeToolTip": "Interfaces\\IServiceRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T05:34:09.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T05:34:09.222Z"
             },
             {
               "$type": "Document",
@@ -126,8 +122,7 @@
               "RelativeToolTip": "Endpoints\\ServiceEndpoints.cs",
               "ViewState": "AgIAAEsAAAAAAAAAAAAAAGQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T04:37:31.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T04:37:31.481Z"
             }
           ]
         }
