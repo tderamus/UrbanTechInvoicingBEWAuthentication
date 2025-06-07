@@ -31,3 +31,5 @@
 ## [Loom Video pt.1 - capstone proposal](https://www.loom.com/share/13d8743ff64f42359225c49ae64fe353?sid=a05b58e2-c454-4de4-bc26-610ec5af7fcc)
 ## [Loom Vieo pt.2 - Submission - MVP](https://www.loom.com/share/264120e0318040a2a69ec05df9286d25?sid=72fab78b-fac2-4a09-85a2-de5c0f4137e8)
 ## [Loom Vieo pt.3 - Unit Testing - MVP](https://www.loom.com/share/948a37b3030b4b1a90e0807ed4edffd9?sid=fafc290c-ddb9-433f-afd9-42649c79eec6)
+## [Loom Vieo pt.4 - Service API CallS - MVP](https://www.loom.com/share/26a5015021f247fba25ae618675af57e?sid=1e8eff10-f2e4-41fb-ac8b-a38d27f33e68)
+## [Loom Vieo pt.5 - Payment, Product API Calls - MVP](https://www.loom.com/share/1c62c1f4c20a42abb7bf52659f867d64?sid=d67df516-e31a-449e-a85b-65db7ca96704)
