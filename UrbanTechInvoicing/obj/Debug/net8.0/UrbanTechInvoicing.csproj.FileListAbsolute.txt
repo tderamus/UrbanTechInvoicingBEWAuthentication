@@ -197,3 +197,4 @@ D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing\obj\Debug\ne
 D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing\obj\Debug\net8.0\UrbanTechInvoicing.pdb
 D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing\obj\Debug\net8.0\UrbanTechInvoicing.genruntimeconfig.cache
 D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing\obj\Debug\net8.0\ref\UrbanTechInvoicing.dll
+D:\workspace\CsharpProjects\UrbanTechInvoicingBE\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
