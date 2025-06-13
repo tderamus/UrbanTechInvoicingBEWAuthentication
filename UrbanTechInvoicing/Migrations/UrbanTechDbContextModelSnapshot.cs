@@ -22,6 +22,202 @@ namespace UrbanTechInvoicing.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("UrbanTechInvoicing.Models.Customer", b =>
                 {
                     b.Property<Guid>("CustomerId")
@@ -47,7 +243,7 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("4ba1b208-0e45-4fcf-9e38-4d41560236cf"),
+                            CustomerId = new Guid("d2c33367-10c3-420a-99bc-2ca7ce8b4e42"),
                             EmailAddress = "customer1@email.com",
                             Name = "Robots Inc",
                             PhoneNumber = "1234567890"
@@ -89,10 +285,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("de4e73b3-07cb-4c11-a09d-804c2f66db38"),
-                            CustomerId = new Guid("4ba1b208-0e45-4fcf-9e38-4d41560236cf"),
-                            DueDate = new DateTime(2025, 7, 2, 1, 41, 13, 234, DateTimeKind.Utc).AddTicks(3783),
-                            InvoiceDate = new DateTime(2025, 6, 2, 1, 41, 13, 234, DateTimeKind.Utc).AddTicks(3782),
+                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
+                            CustomerId = new Guid("d2c33367-10c3-420a-99bc-2ca7ce8b4e42"),
+                            DueDate = new DateTime(2025, 7, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5326),
+                            InvoiceDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5325),
                             InvoiceNumber = "INV001",
                             InvoiceTotal = 1000.00m,
                             Status = "Unpaid"
@@ -122,10 +318,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("de4e73b3-07cb-4c11-a09d-804c2f66db38"),
-                            PaymentId = new Guid("07426956-44c3-4ec4-9c20-ecfcf28a9ca3"),
+                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
+                            PaymentId = new Guid("9adb5f53-33d6-478b-becb-e648bbc1b284"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 2, 1, 41, 13, 234, DateTimeKind.Utc).AddTicks(3948)
+                            PaymentDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5504)
                         });
                 });
 
@@ -199,10 +395,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            PaymentId = new Guid("07426956-44c3-4ec4-9c20-ecfcf28a9ca3"),
-                            InvoiceId = new Guid("de4e73b3-07cb-4c11-a09d-804c2f66db38"),
+                            PaymentId = new Guid("9adb5f53-33d6-478b-becb-e648bbc1b284"),
+                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 2, 1, 41, 13, 234, DateTimeKind.Utc).AddTicks(3935),
+                            PaymentDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5490),
                             PaymentType = "CreditCard"
                         });
                 });
@@ -228,7 +424,7 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("d00a14cf-2201-4bbf-a041-2e9f6d9fa8cf"),
+                            ProductId = new Guid("d5d83aa3-ee09-48da-999f-2d4d3a6a75ad"),
                             Description = "A robot that cleans your house.",
                             ProductName = "Robot Cleaner"
                         });
@@ -255,17 +451,69 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ServiceId = new Guid("9be6f733-87cd-4d7b-80b2-5a34419d5e57"),
+                            ServiceId = new Guid("d24429fe-1d50-4e92-8584-f625041e76b6"),
                             Description = "A service that cleans your house.",
                             ServiceName = "Cleaning Service"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("UrbanTechInvoicing.Models.Invoice", b =>
                 {
                     b.HasOne("UrbanTechInvoicing.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Customer");
                 });

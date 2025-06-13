@@ -12,6 +12,7 @@ namespace UrbanTechInvoicing.Endpoints
             {
                 return await customerService.GetAllCustomersAsync();
             });
+            
 
             routes.MapGet("/customers/{CustomerId}", async (Guid CustomerId, ICustomerService customerService) =>
             {

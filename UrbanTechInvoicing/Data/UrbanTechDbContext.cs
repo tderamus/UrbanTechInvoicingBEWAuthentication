@@ -1,10 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using UrbanTechInvoicing.Models;
 
 namespace UrbanTechInvoicing.Data
 {
-    public class UrbanTechDbContext : DbContext
+    public class UrbanTechDbContext : IdentityDbContext<IdentityUser>
     {
+        public UrbanTechDbContext(DbContextOptions<UrbanTechDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<InvoicePayments> InvoicePayments { get; set; }
@@ -14,13 +21,11 @@ namespace UrbanTechInvoicing.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Models.Service> Services { get; set; }
 
-        public UrbanTechDbContext(DbContextOptions<UrbanTechDbContext> options)
-            : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             // Configure composite keys to be auto-generated
             modelBuilder.Entity<Invoice>()
                 .Property(i => i.InvoiceId)
@@ -29,22 +34,12 @@ namespace UrbanTechInvoicing.Data
             modelBuilder.Entity<Invoice>()
                 .HasOne(i => i.Customer)
                 .WithMany()
-                .HasForeignKey(i => i.CustomerId);
+                .HasForeignKey(i => i.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Invoice>()
                 .Property(i => i.Status)
                 .HasConversion<string>();
-
-            //modelBuilder.Entity<Invoice>()
-            //    .HasOne(i => i.Product)
-            //    .WithMany()
-            //    .HasForeignKey(i => i.ProductId);
-
-            //modelBuilder.Entity<Invoice>()
-            //    .HasOne(i => i.Service)
-            //    .WithMany()
-            //    .HasForeignKey(i => i.ServiceId);
-
 
             modelBuilder.Entity<Customer>()
                 .Property(c => c.CustomerId)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj": {}
+    "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBEWAuthentication\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj": {}
   },
   "projects": {
-    "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj": {
+    "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBEWAuthentication\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj",
+        "projectUniqueName": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBEWAuthentication\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj",
         "projectName": "UrbanTechInvoicing",
-        "projectPath": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj",
+        "projectPath": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBEWAuthentication\\UrbanTechInvoicing\\UrbanTechInvoicing.csproj",
         "packagesPath": "C:\\Users\\tdder\\.nuget\\packages\\",
-        "outputPath": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBE\\UrbanTechInvoicing\\obj\\",
+        "outputPath": "D:\\workspace\\CsharpProjects\\UrbanTechInvoicingBEWAuthentication\\UrbanTechInvoicing\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.5, )"

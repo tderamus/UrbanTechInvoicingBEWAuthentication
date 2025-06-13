@@ -4,6 +4,10 @@ using UrbanTechInvoicing.Interfaces;
 using UrbanTechInvoicing.Services;
 using UrbanTechInvoicing.Repositories;
 using UrbanTechInvoicing.Endpoints;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +21,39 @@ if (builder.Environment.IsDevelopment())
 var connectionString = builder.Configuration.GetConnectionString("UrbanTechDbConnectionString");
 builder.Services.AddDbContext<UrbanTechDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+// Configure Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<UrbanTechDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthorization();
+
+
+// Configure JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        var jwtSecret = builder.Configuration["Jwt:Key"];
+        if (string.IsNullOrEmpty(jwtSecret))
+        {
+            throw new InvalidOperationException("JWT Secret is not configured.");
+        }
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
+        };
+    });
 
 // Add services to the container.
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -67,14 +104,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors();
-
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapCustomerEndpoints();
 app.MapInvoiceEndpoints();
 app.MapPaymentsEndpoints();
 app.MapProductEndpoints();
 app.MapServiceEndpoints();
+app.MapAuthEndpoints();
 app.Run();
 
 
