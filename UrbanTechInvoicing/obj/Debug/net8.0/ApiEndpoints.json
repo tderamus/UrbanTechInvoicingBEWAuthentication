@@ -349,13 +349,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "password",
-        "Type": "System.String",
+        "Name": "loginRequest",
+        "Type": "UrbanTechInvoicing.Endpoints.LoginRequest",
         "IsRequired": true
       }
     ],

@@ -26,7 +26,7 @@ namespace UrbanTechInvoicing.Models
         public required decimal PaymentAmount { get; set; }
         public required DateTime PaymentDate { get; set; }
         public required PmtType PaymentType { get; set; }
-        
+        public string? CreatorUserId { get; set; }
         public virtual Invoice? Invoice { get; set; } // Navigation property to Invoice
     }
 }

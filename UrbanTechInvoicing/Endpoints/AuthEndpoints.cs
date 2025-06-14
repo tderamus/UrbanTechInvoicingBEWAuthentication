@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -21,12 +22,14 @@ public static class AuthEndpoints
         });
 
         routes.MapPost("/login", async (
+            [FromBody] LoginRequest loginRequest,
             UserManager<IdentityUser> userManager,
-            IConfiguration config,
-            string email, string password) =>
+            SignInManager<IdentityUser> SignInManager,
+            IConfiguration config) =>
+            
         {
-            var user = await userManager.FindByEmailAsync(email);
-            if (user != null && await userManager.CheckPasswordAsync(user, password))
+            var user = await userManager.FindByEmailAsync(loginRequest.Email);
+            if (user != null && await userManager.CheckPasswordAsync(user, loginRequest.Password))
             {
                 var claims = new[]
                 {
@@ -54,6 +57,12 @@ public static class AuthEndpoints
 }
 
 public class RegisterRequest
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+
+public class LoginRequest
 {
     public string Email { get; set; }
     public string Password { get; set; }

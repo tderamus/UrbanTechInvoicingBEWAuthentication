@@ -406,3 +406,4 @@ D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoici
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

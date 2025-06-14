@@ -9,5 +9,6 @@ namespace UrbanTechInvoicing.Models
         public required string Name { get; set; }
         public required string EmailAddress { get; set; }
         public required string PhoneNumber { get; set; }
+        public string? CreatorUserId { get; set; }
     }
 }
