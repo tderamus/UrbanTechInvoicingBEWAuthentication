@@ -12,17 +12,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Customer"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -498,17 +488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -800,6 +780,30 @@
           }
         }
       }
+    },
+    "/logout": {
+      "get": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "UrbanTechInvoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -825,6 +829,10 @@
             "nullable": true
           },
           "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatorUserId": {
             "type": "string",
             "nullable": true
           }
@@ -871,6 +879,10 @@
           },
           "customer": {
             "$ref": "#/components/schemas/Customer"
+          },
+          "creatorUserId": {
+            "type": "string",
+            "nullable": true
           },
           "invoicePayments": {
             "type": "array",
@@ -1045,6 +1057,10 @@
           "paymentType": {
             "$ref": "#/components/schemas/PmtType"
           },
+          "creatorUserId": {
+            "type": "string",
+            "nullable": true
+          },
           "invoice": {
             "$ref": "#/components/schemas/Invoice"
           }
@@ -1087,6 +1103,10 @@
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "creatorUserId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1121,6 +1141,10 @@
             "nullable": true
           },
           "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatorUserId": {
             "type": "string",
             "nullable": true
           },

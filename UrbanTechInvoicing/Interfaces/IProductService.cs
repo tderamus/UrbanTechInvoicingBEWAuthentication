@@ -5,6 +5,7 @@ namespace UrbanTechInvoicing.Interfaces
     public interface IProductService
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<IEnumerable<Product>> GetAllProductsByUserAsync(string userId);
         Task<Product> GetProductByIdAsync(Guid ProductId);
         Task<Product> CreateProductAsync(Product product);
         Task<Product> UpdateProductAsync(Guid ProductId, Product product);

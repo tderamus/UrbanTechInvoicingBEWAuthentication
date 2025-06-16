@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -106,6 +107,22 @@ app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next.Invoke();
+    }
+    catch (Exception ex)
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var result = JsonSerializer.Serialize(new { error = ex.Message });
+        await context.Response.WriteAsync(result);
+    }
+});
+
 
 app.MapCustomerEndpoints();
 app.MapInvoiceEndpoints();

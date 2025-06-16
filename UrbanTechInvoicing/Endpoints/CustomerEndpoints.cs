@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+﻿// using System.Runtime.CompilerServices;
 using UrbanTechInvoicing.Interfaces;
 using UrbanTechInvoicing.Models;
 
@@ -13,7 +13,8 @@ namespace UrbanTechInvoicing.Endpoints
             {
                 // Get logged in user information
                 var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                return await customerService.GetAllCustomersByUserAsync(userId);
+                var customers = await customerService.GetAllCustomersByUserAsync(userId);
+                return Results.Ok(customers);
             })
             .RequireAuthorization();
             
@@ -37,6 +38,9 @@ namespace UrbanTechInvoicing.Endpoints
                 {
                     return Results.BadRequest("Customer cannot be null.");
                 }
+
+                customer.CreatorUserId = userId;
+
                 await customerService.CreateCustomerAsync(customer);
                 return Results.Created($"/customers/{customer.CustomerId}", customer);
             })

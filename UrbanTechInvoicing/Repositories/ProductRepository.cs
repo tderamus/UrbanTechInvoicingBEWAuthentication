@@ -16,6 +16,13 @@ namespace UrbanTechInvoicing.Repositories
             return await _dbContext.Products.ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductsByUserAsync(string userId)
+        {
+            return await _dbContext.Products
+                .Where(p => p.CreatorUserId == userId)
+                .ToListAsync();
+        }
+
         public async Task<Product> GetProductByIdAsync(Guid ProductId)
         {
             return await _dbContext.Products.FindAsync(ProductId);

@@ -11,6 +11,11 @@ namespace UrbanTechInvoicing.Services
         {
             return await _productRepository.GetAllProductsAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetAllProductsByUserAsync(string userId)
+        {
+            return await _productRepository.GetAllProductsByUserAsync(userId);
+        }
         public async Task<Product> GetProductByIdAsync(Guid ProductId)
         {
             return await _productRepository.GetProductByIdAsync(ProductId);

@@ -7,26 +7,37 @@ namespace UrbanTechInvoicing.Endpoints
     {
         public static void MapProductEndpoints(this IEndpointRouteBuilder routes)
         {
-            routes.MapGet("/products", async (IProductService productService) =>
+            routes.MapGet("/products", async (HttpContext httpContext, IProductService productService) =>
             {
-                return await productService.GetAllProductsAsync();
-            });
+                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                var products = await productService.GetAllProductsByUserAsync(userId);
+                return Results.Ok(products);
+            })
+                .RequireAuthorization();
 
             routes.MapGet("/products/{ProductId}", async (Guid ProductId, IProductService productService) =>
             {
                 var product = await productService.GetProductByIdAsync(ProductId);
                 return product is not null ? Results.Ok(product) : Results.NotFound();
-            });
+            })
+                .RequireAuthorization();
 
-            routes.MapPost("/products", async (Product product, IProductService productService) =>
+            routes.MapPost("/products", async (HttpContext httpContext, Product product, IProductService productService) =>
             {
+                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Results.Unauthorized();
+                }
                 if (product is null)
                 {
                     return Results.BadRequest("Product cannot be null.");
                 }
+                product.CreatorUserId = userId;
                 await productService.CreateProductAsync(product);
                 return Results.Created($"/products/{product.ProductId}", product);
-            });
+            })
+                .RequireAuthorization();
 
             routes.MapPut("/products/{ProductId}", async (Guid ProductId, Product product, IProductService productService) =>
             {
@@ -41,7 +52,8 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await productService.UpdateProductAsync(ProductId, product);
                 return Results.Ok(existingProduct);
-            });
+            })
+                .RequireAuthorization();
 
             routes.MapDelete("/products/{ProductId}", async (Guid ProductId, IProductService productService) =>
             {
@@ -52,7 +64,8 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await productService.DeleteProductAsync(ProductId);
                 return Results.Content($"ProductID {product.ProductId} has been deleted");
-            });
+            })
+                .RequireAuthorization();
 
             routes.MapGet("/products/search", async (string searchTerm, IProductService productService) =>
             {
