@@ -33,16 +33,50 @@ namespace UrbanTechInvoicing.Tests
         {
             // Arrange
             var mockServiceRepository = new Mock<IServiceRepository>();
-            var service = new Service { ServiceId = Guid.NewGuid(), ServiceName = "New Service", Description = "New Description" };
-            mockServiceRepository.Setup(repo => repo.CreateServiceAsync(service))
-                .ReturnsAsync(service);
-            var serviceService = new ServiceService(mockServiceRepository.Object);
-            // Act
-            await serviceService.CreateServiceAsync(service);
-            // Assert
-            mockServiceRepository.Verify(repo => repo.CreateServiceAsync(It.IsAny<Service>()), Times.Once);
+            var service = new Service
+            {
+                ServiceId = Guid.NewGuid(),
+                ServiceName = "New Service",
+                Description = "New Description"
+            };
 
+            mockServiceRepository
+                .Setup(repo => repo.CreateServiceAsync(It.IsAny<Service>()))
+                .ReturnsAsync(service);
+
+            var serviceService = new ServiceService(mockServiceRepository.Object);
+            var testUserId = "test-user-123";
+
+            // Act
+            await serviceService.CreateServiceAsync(service, testUserId);
+
+            // Assert
+            mockServiceRepository.Verify(repo => repo.CreateServiceAsync(It.Is<Service>(
+                s => s.CreatorUserId == testUserId
+            )), Times.Once);
         }
+
+
+        [Fact]
+        public async Task CreateServiceWithDtoAsync_ShouldReturnCorrectDto()
+        {
+            // Arrange
+            var service = new Service { ServiceId = Guid.NewGuid(), ServiceName = "New", Description = "Desc" };
+            var mockRepo = new Mock<IServiceRepository>();
+            mockRepo.Setup(r => r.CreateServiceAsync(It.IsAny<Service>())).ReturnsAsync(service);
+
+            var serviceService = new ServiceService(mockRepo.Object);
+
+            // Act
+            var dto = await serviceService.CreateServiceWithDtoAsync(service, "user-123");
+
+            // Assert
+            Assert.Equal(service.ServiceId, dto.ServiceId);
+            Assert.Equal(service.ServiceName, dto.ServiceName);
+            Assert.Equal(service.Description, dto.Description);
+            Assert.Equal("user-123", dto.CreatorUserId);
+        }
+
 
         [Fact]
         public async Task UpdateServiceAsync_ShouldUpdateService()

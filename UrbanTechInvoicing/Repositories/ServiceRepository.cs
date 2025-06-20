@@ -13,6 +13,10 @@ namespace UrbanTechInvoicing.Repositories
         {
             return await _context.Services.ToListAsync();
         }
+        public async Task<IEnumerable<Service>> GetServicesByUserIdAsync(string userId)
+        {
+            return await _context.Services.Where(s => s.CreatorUserId == userId).ToListAsync();
+        }
         public async Task<Service> GetServiceByIdAsync(Guid ServiceId)
         {
             
@@ -30,7 +34,7 @@ namespace UrbanTechInvoicing.Repositories
             var existingService = await _context.Services.FindAsync(ServiceId);
             if (existingService == null)
             {
-                return (Service)Results.BadRequest("Service cannot be null.");
+                throw new ArgumentException("Service not found.");
             }
             existingService.ServiceName = service.ServiceName;
             existingService.Description = service.Description;
@@ -42,7 +46,7 @@ namespace UrbanTechInvoicing.Repositories
             var service = await _context.Services.FindAsync(ServiceId);
             if (service == null)
             {
-                return (Service)Results.BadRequest("Service cannot be null.");
+                throw new ArgumentException("Service not found.");
             }
 
             _context.Services.Remove(service);

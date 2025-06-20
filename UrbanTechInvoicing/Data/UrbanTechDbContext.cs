@@ -62,6 +62,12 @@ namespace UrbanTechInvoicing.Data
                 .Property(s => s.ServiceId)
                 .ValueGeneratedOnAdd();
 
+                modelBuilder.Entity<Models.Service>()
+                .HasOne<IdentityUser>()
+                .WithMany()
+                .HasForeignKey(s => s.CreatorUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
 
             // Configure the composite key for InvoicePayments
             modelBuilder.Entity<InvoicePayments>()

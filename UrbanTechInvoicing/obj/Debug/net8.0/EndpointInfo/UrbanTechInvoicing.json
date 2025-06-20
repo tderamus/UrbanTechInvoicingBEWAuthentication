@@ -627,17 +627,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Service"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -1126,10 +1116,6 @@
         "additionalProperties": false
       },
       "Service": {
-        "required": [
-          "description",
-          "serviceName"
-        ],
         "type": "object",
         "properties": {
           "serviceId": {
@@ -1146,13 +1132,6 @@
           },
           "creatorUserId": {
             "type": "string",
-            "nullable": true
-          },
-          "invoiceServices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InvoiceService"
-            },
             "nullable": true
           }
         },
