@@ -667,8 +667,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "service",
-        "Type": "UrbanTechInvoicing.Models.Service",
+        "Name": "dto",
+        "Type": "UrbanTechInvoicing.Dtos.ServiceCreateDto",
         "IsRequired": true
       }
     ],

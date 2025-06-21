@@ -23,43 +23,31 @@ namespace UrbanTechInvoicing.Endpoints
             })
                 .RequireAuthorization();
 
-            routes.MapPost("/services", async (HttpContext httpContext, Service service, IServiceService serviceService) =>
-            {
+            routes.MapPost("/services", async (HttpContext httpContext, ServiceCreateDto dto, IServiceService serviceService) =>
+                {
+                    if (dto is null)
+                        return Results.BadRequest("Service cannot be null.");
 
-                Console.WriteLine("===== User Claims =====");
-                foreach (var claim in httpContext.User.Claims)
-                {
-                    Console.WriteLine($"Type: {claim.Type}, Value: {claim.Value}");
-                }
-                Console.WriteLine("=======================");
+                    var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                    if (string.IsNullOrWhiteSpace(userId))
+                        return Results.Unauthorized();
+                    if (string.IsNullOrWhiteSpace(dto.ServiceName) || string.IsNullOrWhiteSpace(dto.Description))
+                        return Results.BadRequest("Service name and description cannot be empty.");
+                    
 
-                if (service is null)
-                {
-                    return Results.BadRequest("Service cannot be null.");
-                }
-
-                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrWhiteSpace(service.ServiceName) || string.IsNullOrWhiteSpace(service.Description))
-                {
-                    return Results.BadRequest("Service name and description cannot be empty.");
-                }
-                if (string.IsNullOrWhiteSpace(userId))
-                {
-                    return Results.Unauthorized();
-                }
-                try
+                    var service = new Service
                     {
-                        var serviceDto = await serviceService.CreateServiceWithDtoAsync(service, userId);
-                        return Results.Created($"/services/{serviceDto.ServiceId}", serviceDto);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"🔥 Error creating service: {ex.Message}");
-                        Console.WriteLine(ex.StackTrace);
-                        return Results.Problem("Internal server error while creating service.");
-                    }
-            })
+                        ServiceName = dto.ServiceName,
+                        Description = dto.Description,
+                        CreatorUserId = userId
+                    };
+
+                    var serviceDto = await serviceService.CreateServiceWithDtoAsync(service, userId);
+                    return Results.Created($"/services/{serviceDto.ServiceId}", serviceDto);
+                })
                 .RequireAuthorization();
+
+
 
             routes.MapPut("/services/{ServiceId}", async (Guid ServiceId, Service service, IServiceService serviceService) =>
             {

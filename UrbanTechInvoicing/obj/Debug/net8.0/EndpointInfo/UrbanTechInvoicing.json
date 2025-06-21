@@ -639,7 +639,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Service"
+                "$ref": "#/components/schemas/ServiceCreateDto"
               }
             }
           },
@@ -1122,6 +1122,24 @@
             "type": "string",
             "format": "uuid"
           },
+          "serviceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatorUserId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceCreateDto": {
+        "type": "object",
+        "properties": {
           "serviceName": {
             "type": "string",
             "nullable": true
