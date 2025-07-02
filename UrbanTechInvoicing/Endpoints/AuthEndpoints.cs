@@ -36,13 +36,21 @@ public static class AuthEndpoints
             {
                 var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id ?? string.Empty),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.Email!)
+                    new Claim(ClaimTypes.NameIdentifier, user.Id ?? string.Empty),
+                    new Claim(ClaimTypes.Name, user.Email ?? string.Empty)
                 };
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+
+                var jwtKey = config["Jwt:Key"];
+                if (string.IsNullOrEmpty(jwtKey))
+                {
+                    return Results.Json(new { success = false, message = "JWT key is not configured" }, statusCode: 500);
+                }
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var token = new JwtSecurityToken(
                     issuer: config["Jwt:Issuer"],
@@ -67,6 +75,7 @@ public static class AuthEndpoints
             await signInManager.SignOutAsync();
             return Results.Ok("User logged out");
         });
+
         routes.MapGet("/user", async (HttpContext httpContext) =>
         {
             var userId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -74,20 +83,22 @@ public static class AuthEndpoints
             {
                 return Results.Unauthorized();
             }
-            return Results.Ok(new { UserId = userId, Email = httpContext.User.Identity?.Name });
-        }).RequireAuthorization();
+            return await Task.FromResult(Results.Ok(new { UserId = userId, Email = httpContext.User.Identity?.Name }));
+        })
+            .RequireAuthorization();
+
 
     }
 }
 
 public class RegisterRequest
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
 }
 
 public class LoginRequest
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
 }

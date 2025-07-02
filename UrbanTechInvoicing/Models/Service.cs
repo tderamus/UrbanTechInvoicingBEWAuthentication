@@ -7,7 +7,9 @@ namespace UrbanTechInvoicing.Models
     {
         [Key]
         public Guid ServiceId { get; set; }
+        [Required]
         public string ServiceName { get; set; } = string.Empty;
+        [Required]
         public string Description { get; set; } = string.Empty;
         public string? CreatorUserId { get; set; }
         [JsonIgnore]

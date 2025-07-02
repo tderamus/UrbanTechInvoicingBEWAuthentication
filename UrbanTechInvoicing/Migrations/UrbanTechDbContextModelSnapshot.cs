@@ -135,6 +135,24 @@ namespace UrbanTechInvoicing.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "user1-guid",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9b7ec731-1ba5-455b-967c-86ebc390934d",
+                            Email = "test@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEST@EXAMPLE.COM",
+                            NormalizedUserName = "TESTUSER",
+                            PasswordHash = "<hashed-password>",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "cf80f017-4b8d-4a7f-b4e2-ba5f076a36b8",
+                            TwoFactorEnabled = false,
+                            UserName = "testuser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -246,7 +264,8 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("d5956c5c-2b37-4c56-af29-d61011213c0e"),
+                            CustomerId = new Guid("f93bf1eb-9e9b-4859-a15a-09cd3654e216"),
+                            CreatorUserId = "user1-guid",
                             EmailAddress = "customer1@email.com",
                             Name = "Robots Inc",
                             PhoneNumber = "1234567890"
@@ -291,10 +310,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("e8c08e5d-7da1-498e-bc65-552ccb9fb96b"),
-                            CustomerId = new Guid("d5956c5c-2b37-4c56-af29-d61011213c0e"),
-                            DueDate = new DateTime(2025, 7, 20, 19, 48, 36, 627, DateTimeKind.Utc).AddTicks(3308),
-                            InvoiceDate = new DateTime(2025, 6, 20, 19, 48, 36, 627, DateTimeKind.Utc).AddTicks(3305),
+                            InvoiceId = new Guid("a2d23f23-00b4-432a-995d-43cd78016821"),
+                            CustomerId = new Guid("f93bf1eb-9e9b-4859-a15a-09cd3654e216"),
+                            DueDate = new DateTime(2025, 7, 25, 3, 48, 49, 809, DateTimeKind.Utc).AddTicks(7376),
+                            InvoiceDate = new DateTime(2025, 6, 25, 3, 48, 49, 809, DateTimeKind.Utc).AddTicks(7374),
                             InvoiceNumber = "INV001",
                             InvoiceTotal = 1000.00m,
                             Status = "Unpaid"
@@ -324,10 +343,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("e8c08e5d-7da1-498e-bc65-552ccb9fb96b"),
-                            PaymentId = new Guid("95a85e6e-0fd0-45b4-836b-002876f2b044"),
+                            InvoiceId = new Guid("a2d23f23-00b4-432a-995d-43cd78016821"),
+                            PaymentId = new Guid("8c507258-23c5-403e-b01a-8c5aa2faab22"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 20, 19, 48, 36, 627, DateTimeKind.Utc).AddTicks(3579)
+                            PaymentDate = new DateTime(2025, 6, 25, 3, 48, 49, 809, DateTimeKind.Utc).AddTicks(7738)
                         });
                 });
 
@@ -404,10 +423,11 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            PaymentId = new Guid("95a85e6e-0fd0-45b4-836b-002876f2b044"),
-                            InvoiceId = new Guid("e8c08e5d-7da1-498e-bc65-552ccb9fb96b"),
+                            PaymentId = new Guid("8c507258-23c5-403e-b01a-8c5aa2faab22"),
+                            CreatorUserId = "user1-guid",
+                            InvoiceId = new Guid("a2d23f23-00b4-432a-995d-43cd78016821"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 20, 19, 48, 36, 627, DateTimeKind.Utc).AddTicks(3562),
+                            PaymentDate = new DateTime(2025, 6, 25, 3, 48, 49, 809, DateTimeKind.Utc).AddTicks(7723),
                             PaymentType = "CreditCard"
                         });
                 });
@@ -436,7 +456,8 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("8e5a14dc-8a4e-40a3-b283-d741d1059da1"),
+                            ProductId = new Guid("8cdf8775-1a11-41ca-9ce7-7165be03c9b2"),
+                            CreatorUserId = "user1-guid",
                             Description = "A robot that cleans your house.",
                             ProductName = "Robot Cleaner"
                         });
@@ -468,7 +489,8 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ServiceId = new Guid("e4e7a694-ff70-46ee-88e6-75ac6cd7ef6f"),
+                            ServiceId = new Guid("974bedc7-00b0-4dff-9d79-5c2a740b822a"),
+                            CreatorUserId = "user1-guid",
                             Description = "A service that cleans your house.",
                             ServiceName = "Cleaning Service"
                         });

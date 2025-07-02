@@ -12,8 +12,8 @@ using UrbanTechInvoicing.Data;
 namespace UrbanTechInvoicing.Migrations
 {
     [DbContext(typeof(UrbanTechDbContext))]
-    [Migration("20250613031756_UpdateCascadeDelete")]
-    partial class UpdateCascadeDelete
+    [Migration("20250621033757_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,6 +138,24 @@ namespace UrbanTechInvoicing.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "user1-guid",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ebd52166-8274-4b50-b4c2-98ba978eb723",
+                            Email = "test@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEST@EXAMPLE.COM",
+                            NormalizedUserName = "TESTUSER",
+                            PasswordHash = "<hashed-password>",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "eee54ef1-7654-4b3f-a620-2ff3a75dd078",
+                            TwoFactorEnabled = false,
+                            UserName = "testuser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -227,6 +245,9 @@ namespace UrbanTechInvoicing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasColumnType("text");
@@ -246,7 +267,8 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = new Guid("d2c33367-10c3-420a-99bc-2ca7ce8b4e42"),
+                            CustomerId = new Guid("327bfd40-0f28-4299-8351-c19e98a20492"),
+                            CreatorUserId = "user1-guid",
                             EmailAddress = "customer1@email.com",
                             Name = "Robots Inc",
                             PhoneNumber = "1234567890"
@@ -258,6 +280,9 @@ namespace UrbanTechInvoicing.Migrations
                     b.Property<Guid>("InvoiceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uuid");
@@ -288,10 +313,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
-                            CustomerId = new Guid("d2c33367-10c3-420a-99bc-2ca7ce8b4e42"),
-                            DueDate = new DateTime(2025, 7, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5326),
-                            InvoiceDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5325),
+                            InvoiceId = new Guid("159a822d-88ed-4c00-9320-18bd3e09b77e"),
+                            CustomerId = new Guid("327bfd40-0f28-4299-8351-c19e98a20492"),
+                            DueDate = new DateTime(2025, 7, 21, 3, 37, 57, 240, DateTimeKind.Utc).AddTicks(1614),
+                            InvoiceDate = new DateTime(2025, 6, 21, 3, 37, 57, 240, DateTimeKind.Utc).AddTicks(1610),
                             InvoiceNumber = "INV001",
                             InvoiceTotal = 1000.00m,
                             Status = "Unpaid"
@@ -321,10 +346,10 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
-                            PaymentId = new Guid("9adb5f53-33d6-478b-becb-e648bbc1b284"),
+                            InvoiceId = new Guid("159a822d-88ed-4c00-9320-18bd3e09b77e"),
+                            PaymentId = new Guid("11891631-b997-4a32-851b-0b3fbf233a99"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5504)
+                            PaymentDate = new DateTime(2025, 6, 21, 3, 37, 57, 240, DateTimeKind.Utc).AddTicks(2022)
                         });
                 });
 
@@ -376,6 +401,9 @@ namespace UrbanTechInvoicing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("InvoiceId")
                         .HasColumnType("uuid");
 
@@ -398,10 +426,11 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            PaymentId = new Guid("9adb5f53-33d6-478b-becb-e648bbc1b284"),
-                            InvoiceId = new Guid("fa794c98-8d47-4ff0-9ae2-2f34fe7dcf26"),
+                            PaymentId = new Guid("11891631-b997-4a32-851b-0b3fbf233a99"),
+                            CreatorUserId = "user1-guid",
+                            InvoiceId = new Guid("159a822d-88ed-4c00-9320-18bd3e09b77e"),
                             PaymentAmount = 1000.00m,
-                            PaymentDate = new DateTime(2025, 6, 13, 3, 17, 56, 358, DateTimeKind.Utc).AddTicks(5490),
+                            PaymentDate = new DateTime(2025, 6, 21, 3, 37, 57, 240, DateTimeKind.Utc).AddTicks(2006),
                             PaymentType = "CreditCard"
                         });
                 });
@@ -411,6 +440,9 @@ namespace UrbanTechInvoicing.Migrations
                     b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -427,7 +459,8 @@ namespace UrbanTechInvoicing.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("d5d83aa3-ee09-48da-999f-2d4d3a6a75ad"),
+                            ProductId = new Guid("189ee6e4-2e11-4232-9530-d9db940d94f6"),
+                            CreatorUserId = "user1-guid",
                             Description = "A robot that cleans your house.",
                             ProductName = "Robot Cleaner"
                         });
@@ -439,6 +472,9 @@ namespace UrbanTechInvoicing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -449,12 +485,15 @@ namespace UrbanTechInvoicing.Migrations
 
                     b.HasKey("ServiceId");
 
+                    b.HasIndex("CreatorUserId");
+
                     b.ToTable("Services");
 
                     b.HasData(
                         new
                         {
-                            ServiceId = new Guid("d24429fe-1d50-4e92-8584-f625041e76b6"),
+                            ServiceId = new Guid("2b72db3e-2b7b-44ee-a5ff-da24fc09b653"),
+                            CreatorUserId = "user1-guid",
                             Description = "A service that cleans your house.",
                             ServiceName = "Cleaning Service"
                         });
@@ -587,6 +626,14 @@ namespace UrbanTechInvoicing.Migrations
                         .IsRequired();
 
                     b.Navigation("Invoice");
+                });
+
+            modelBuilder.Entity("UrbanTechInvoicing.Models.Service", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("UrbanTechInvoicing.Models.Invoice", b =>

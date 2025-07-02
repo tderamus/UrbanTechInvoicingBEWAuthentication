@@ -385,12 +385,6 @@ D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoici
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.build.json
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.development.json
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets\msbuild.UrbanTechInvoicing.Microsoft.AspNetCore.StaticWebAssets.props
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets\msbuild.UrbanTechInvoicing.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets\msbuild.build.UrbanTechInvoicing.props
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.UrbanTechInvoicing.props
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.UrbanTechInvoicing.props
-D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.pack.json
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\UrbanTec.5FCEE824.Up2Date
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\UrbanTechInvoicing.dll
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\refint\UrbanTechInvoicing.dll
@@ -407,3 +401,8 @@ D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoici
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\rjimswa.dswa.cache.json
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+D:\workspace\CsharpProjects\UrbanTechInvoicingBEWAuthentication\UrbanTechInvoicing\obj\Debug\net8.0\staticwebassets.build.json.cache

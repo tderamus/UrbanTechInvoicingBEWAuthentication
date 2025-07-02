@@ -13,6 +13,17 @@ namespace UrbanTechInvoicing.Repositories
         {
             return await _context.Payments.ToListAsync();
         }
+
+        public async Task<IEnumerable<Payments>> GetPaymentsByUserIdAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Enumerable.Empty<Payments>();
+            }
+            return await _context.Payments
+                .Where(p => p.CreatorUserId == userId)
+                .ToListAsync();
+        }
         public async Task<Payments> GetPaymentByIdAsync(Guid PaymentId)
         {
             var payment = await _context.Payments.FindAsync(PaymentId);

@@ -52,7 +52,8 @@ builder.Services.AddAuthentication(options =>
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+            NameClaimType = System.Security.Claims.ClaimTypes.NameIdentifier,
         };
     });
 
@@ -131,5 +132,3 @@ app.MapProductEndpoints();
 app.MapServiceEndpoints();
 app.MapAuthEndpoints();
 app.Run();
-
-

@@ -1,6 +1,7 @@
 ﻿using UrbanTechInvoicing.Interfaces;
 using UrbanTechInvoicing.Models;
 using UrbanTechInvoicing.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace UrbanTechInvoicing.Services
 {
@@ -20,16 +21,36 @@ namespace UrbanTechInvoicing.Services
         {
             return await _serviceRepository.GetServiceByIdAsync(ServiceId);
         }
-       public async Task<Service> CreateServiceAsync(Service service, string? creatorUserId)
-        {
-            Console.WriteLine($"📝 Setting CreatorUserId: {creatorUserId}");
-            service.CreatorUserId = creatorUserId;
 
-            Console.WriteLine($"➡️ Inserting service: {service.ServiceName}, {service.Description}");
-            var result = await _serviceRepository.CreateServiceAsync(service);
-            Console.WriteLine("✅ Service inserted successfully.");
-            return result;
+
+        public async Task<Service> CreateServiceAsync(Service service, string? creatorUserId)
+        {
+            try
+            {
+                Console.WriteLine($"📝 Setting CreatorUserId: {creatorUserId}");
+                service.CreatorUserId = creatorUserId;
+
+                Console.WriteLine($"➡️ Inserting service: {service.ServiceName}, {service.Description}");
+                var result = await _serviceRepository.CreateServiceAsync(service);
+                Console.WriteLine("✅ Service inserted successfully.");
+                return result;
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine($"❌ DbUpdateException: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"🔍 Inner Exception: {ex.InnerException.GetType().Name}: {ex.InnerException.Message}");
+                }
+                else
+                {
+                    Console.WriteLine("ℹ️ No inner exception details.");
+                }
+                throw;
+            }
         }
+
+
 
 
         public async Task<ServiceDto> CreateServiceWithDtoAsync(Service service, string? creatorUserId)

@@ -1,5 +1,6 @@
 ﻿using UrbanTechInvoicing.Interfaces;
 using UrbanTechInvoicing.Models;
+using UrbanTechInvoicing.DTOS;
 
 
 namespace UrbanTechInvoicing.Endpoints
@@ -8,25 +9,49 @@ namespace UrbanTechInvoicing.Endpoints
     {
         public static void MapPaymentsEndpoints(this IEndpointRouteBuilder routes)
         {
-            routes.MapGet("/payments", async (IPaymentsService paymentsService) =>
+            routes.MapGet("/payments", async (HttpContext httpContext, IPaymentsService paymentsService) =>
             {
-                return await paymentsService.GetAllPaymentsAsync();
-            });
+                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Results.Unauthorized();
+                }
+                var payments = await paymentsService.GetPaymentsByUserIdAsync(userId);
+                return payments.Any() ? Results.Ok(payments) : Results.NotFound("No payments found for the user.");
+            })
+                .RequireAuthorization();
+
             routes.MapGet("/payments/{PaymentId}", async (Guid PaymentId, IPaymentsService paymentsService) =>
             {
                 var payment = await paymentsService.GetPaymentByIdAsync(PaymentId);
                 return payment is not null ? Results.Ok(payment) : Results.NotFound();
-            });
+            })
+                .RequireAuthorization();
 
-            routes.MapPost("/payments", async (Payments payment, IPaymentsService paymentsService) =>
+            routes.MapPost("/payments", async (HttpContext httpContext, PaymentCreateDto dto, IPaymentsService paymentsService) =>
             {
-                if (payment is null)
+                if (dto is null)
                 {
                     return Results.BadRequest("Payment cannot be null.");
                 }
-                await paymentsService.CreatePaymentAsync(payment);
-                return Results.Created($"/payments/{payment.PaymentId}", payment);
-            });
+                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Results.Unauthorized();
+                }
+                var payment = new Payments
+                {
+                    InvoiceId = dto.InvoiceId,
+                    PaymentAmount = dto.PaymentAmount,
+                    PaymentDate = dto.PaymentDate,
+                    PaymentType = dto.PaymentType,
+                    CreatorUserId = userId
+                };
+
+                var paymentDto = await paymentsService.CreatePaymentWithDtoAsync(payment, userId);
+                return Results.Created($"/payments/{paymentDto.PaymentId}", paymentDto);
+            })
+                .RequireAuthorization();
 
             routes.MapPut("/payments/{PaymentId}", async (Guid PaymentId, Payments payment, IPaymentsService paymentsService) =>
             {
@@ -56,14 +81,20 @@ namespace UrbanTechInvoicing.Endpoints
             return TypedResults.Ok(await paymentsService.GetAllPaymentsAsync());
         }
 
-        public static async Task<IResult> CreatePaymentAsync(Payments payment, IPaymentsService paymentsService)
+        public static async Task<IResult> CreatePaymentAsync(HttpContext context, Payments payment, IPaymentsService paymentsService)
         {
             if (payment is null)
             {
                 return TypedResults.BadRequest("Payment cannot be null.");
             }
-            await paymentsService.CreatePaymentAsync(payment);
-            return TypedResults.Created($"/payments/{payment.PaymentId}", payment);
+            var userId = context.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return TypedResults.Unauthorized();
+            }
+            var createdPayment = await paymentsService.CreatePaymentWithDtoAsync(payment, userId);
+            return TypedResults.Created($"/payments/{createdPayment.PaymentId}", createdPayment);
         }
 
         public static async Task<IResult> UpdatePaymentAsync(Guid PaymentId, Payments payment, IPaymentsService paymentsService)

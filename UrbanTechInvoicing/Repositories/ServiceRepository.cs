@@ -15,8 +15,16 @@ namespace UrbanTechInvoicing.Repositories
         }
         public async Task<IEnumerable<Service>> GetServicesByUserIdAsync(string userId)
         {
-            return await _context.Services.Where(s => s.CreatorUserId == userId).ToListAsync();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return new List<Service>();
+            }
+
+            return await _context.Services
+                .Where(s => s.CreatorUserId == userId)
+                .ToListAsync();
         }
+
         public async Task<Service> GetServiceByIdAsync(Guid ServiceId)
         {
             

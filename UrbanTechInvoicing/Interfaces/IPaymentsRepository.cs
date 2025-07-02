@@ -6,6 +6,7 @@ namespace UrbanTechInvoicing.Interfaces
     public interface IPaymentsRepository
     {
         Task<IEnumerable<Payments>> GetAllPaymentsAsync();
+        Task<IEnumerable<Payments>> GetPaymentsByUserIdAsync(string userId);
         Task<Payments> GetPaymentByIdAsync(Guid PaymentId);
         Task<Payments> CreatePaymentAsync(Payments payment);
         Task<Payments> UpdatePaymentAsync(Guid PaymentId, Payments payment);

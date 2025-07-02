@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UrbanTechInvoicing.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace UrbanTechInvoicing.Data
 {
@@ -115,13 +116,29 @@ namespace UrbanTechInvoicing.Data
                     CustomerId = seedCustomerId
                 });
 
+             modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser
+                {
+                    Id = "user1-guid",
+                    UserName = "testuser",
+                    NormalizedUserName = "TESTUSER",
+                    Email = "test@example.com",
+                    NormalizedEmail = "TEST@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = "<hashed-password>",
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                }
+            );
+
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
                 {
                     CustomerId = seedCustomerId,
                     Name = "Robots Inc",
                     EmailAddress = "customer1@email.com",
-                    PhoneNumber = "1234567890"
+                    PhoneNumber = "1234567890",
+                    CreatorUserId = "user1-guid" // Assuming a system user for seeding
                 });
 
             modelBuilder.Entity<Product>().HasData(
@@ -129,7 +146,8 @@ namespace UrbanTechInvoicing.Data
                 {
                     ProductId = seedProductId,
                     ProductName = "Robot Cleaner",
-                    Description = "A robot that cleans your house."
+                    Description = "A robot that cleans your house.",
+                    CreatorUserId = "user1-guid" // Assuming a system user for seeding
                 });
 
             modelBuilder.Entity<Service>().HasData(
@@ -137,7 +155,8 @@ namespace UrbanTechInvoicing.Data
                 {
                     ServiceId = seedServiceId,
                     ServiceName = "Cleaning Service",
-                    Description = "A service that cleans your house."
+                    Description = "A service that cleans your house.",
+                    CreatorUserId = "user1-guid" // Assuming a system user for seeding
                 });
 
             modelBuilder.Entity<Payments>().HasData(
@@ -148,6 +167,7 @@ namespace UrbanTechInvoicing.Data
                     PaymentDate = DateTime.UtcNow,
                     PaymentAmount = 1000.00m,
                     PaymentType = Models.Payments.PmtType.CreditCard,
+                    CreatorUserId = "user1-guid" // Assuming a system user for seeding
                 });
 
             // 🔗 Link the payment to the invoice via join table

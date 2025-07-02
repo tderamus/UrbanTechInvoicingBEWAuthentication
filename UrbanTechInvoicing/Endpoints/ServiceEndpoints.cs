@@ -9,18 +9,15 @@ namespace UrbanTechInvoicing.Endpoints
         public static void MapServiceEndpoints(this IEndpointRouteBuilder routes)
         {
             routes.MapGet("/services", async (HttpContext httpContext, IServiceService serviceService) =>
-            {
-                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                var services = await serviceService.GetServicesByUserIdAsync(userId);
-                return services is not null ? Results.Ok(services) : Results.NotFound();
-            })
-                .RequireAuthorization();
+                {
+                    var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            routes.MapGet("/services/{ServiceId}", async (Guid ServiceId, IServiceService serviceService) =>
-            {
-                var service = await serviceService.GetServiceByIdAsync(ServiceId);
-                return service is not null ? Results.Ok(service) : Results.NotFound();
-            })
+                    if (string.IsNullOrEmpty(userId))
+                        return Results.Unauthorized();
+
+                    var services = await serviceService.GetServicesByUserIdAsync(userId);
+                    return Results.Ok(services);
+                })
                 .RequireAuthorization();
 
             routes.MapPost("/services", async (HttpContext httpContext, ServiceCreateDto dto, IServiceService serviceService) =>
@@ -29,6 +26,7 @@ namespace UrbanTechInvoicing.Endpoints
                         return Results.BadRequest("Service cannot be null.");
 
                     var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                    Console.WriteLine($"[Endpoint] userId from claims: {userId}");
                     if (string.IsNullOrWhiteSpace(userId))
                         return Results.Unauthorized();
                     if (string.IsNullOrWhiteSpace(dto.ServiceName) || string.IsNullOrWhiteSpace(dto.Description))

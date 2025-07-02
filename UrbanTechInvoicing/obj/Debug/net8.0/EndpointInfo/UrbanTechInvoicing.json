@@ -371,17 +371,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Payments"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -393,7 +383,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Payments"
+                "$ref": "#/components/schemas/PaymentCreateDto"
               }
             }
           },
@@ -653,27 +643,6 @@
       }
     },
     "/services/{ServiceId}": {
-      "get": {
-        "tags": [
-          "UrbanTechInvoicing"
-        ],
-        "parameters": [
-          {
-            "name": "ServiceId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "put": {
         "tags": [
           "UrbanTechInvoicing"
@@ -1007,6 +976,10 @@
         "format": "int32"
       },
       "LoginRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
@@ -1014,6 +987,31 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentCreateDto": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PmtType"
+          },
+          "creatorUserId": {
             "type": "string",
             "nullable": true
           }
@@ -1102,6 +1100,10 @@
         "additionalProperties": false
       },
       "RegisterRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
@@ -1116,6 +1118,10 @@
         "additionalProperties": false
       },
       "Service": {
+        "required": [
+          "description",
+          "serviceName"
+        ],
         "type": "object",
         "properties": {
           "serviceId": {
@@ -1123,12 +1129,12 @@
             "format": "uuid"
           },
           "serviceName": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "description": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "creatorUserId": {
             "type": "string",
