@@ -1,6 +1,7 @@
 ﻿using UrbanTechInvoicing.Models;
 using UrbanTechInvoicing.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using UrbanTechInvoicing.Dtos;
 
 namespace UrbanTechInvoicing.Services
 {
@@ -12,6 +13,10 @@ namespace UrbanTechInvoicing.Services
         public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
         {
             return await _invoiceRepository.GetAllInvoicesAsync();
+        }
+        public async Task<IEnumerable<Invoice>> GetInvoiceByCreatorUserIdAsync(string CreatorUserId)
+        {
+            return await _invoiceRepository.GetInvoiceByCreatorUserIdAsync(CreatorUserId);
         }
 
         public async Task<Invoice> GetInvoiceByIdAsync(Guid InvoiceId)
@@ -40,6 +45,45 @@ namespace UrbanTechInvoicing.Services
             invoice.InvoiceNumber = $"INV{nextNumber:D3}";
 
             return await _invoiceRepository.CreateInvoiceAsync(invoice);
+        }
+
+        public async Task<InvoiceDto> CreateInvoiceWithDtoAsync(Invoice invoice, string? creatorUserId)
+        {
+            if (invoice == null)
+            {
+                throw new ArgumentNullException(nameof(invoice), "Invoice cannot be null.");
+            }
+            invoice.CreatorUserId = creatorUserId;
+
+            // Generate InvoiceNumber if not provided
+            if (string.IsNullOrWhiteSpace(invoice.InvoiceNumber))
+            {
+                var invoices = await _invoiceRepository.GetAllInvoicesAsync();
+                var lastInvoice = invoices
+                    .OrderByDescending(i => i.InvoiceNumber)
+                    .FirstOrDefault();
+
+                int nextNumber = 1;
+                if (lastInvoice != null &&
+                    int.TryParse(lastInvoice.InvoiceNumber.Replace("INV", ""), out int lastNumber))
+                {
+                    nextNumber = lastNumber + 1;
+                }
+
+                invoice.InvoiceNumber = $"INV{nextNumber:D3}";
+            }
+
+            var createdInvoice = await _invoiceRepository.CreateInvoiceAsync(invoice);
+            return new InvoiceDto(
+                createdInvoice.InvoiceId,
+                createdInvoice.CreatorUserId ?? string.Empty,
+                createdInvoice.InvoiceNumber,
+                createdInvoice.CustomerId ?? Guid.Empty,
+                createdInvoice.InvoiceDate,
+                createdInvoice.DueDate,
+                createdInvoice.Status, 
+                createdInvoice.InvoiceTotal
+            );
         }
 
         public async Task<Invoice> UpdateInvoiceAsync(Guid InvoiceId, Invoice invoice)

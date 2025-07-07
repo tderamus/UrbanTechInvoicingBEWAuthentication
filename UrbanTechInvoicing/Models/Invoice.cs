@@ -19,7 +19,7 @@ namespace UrbanTechInvoicing.Models
 
         [Key]
         public Guid InvoiceId { get; set; }
-        public required string InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; } = string.Empty;
         public required DateTime InvoiceDate { get; set; }
         public required DateTime DueDate { get; set; }
         public required decimal InvoiceTotal { get; set; }

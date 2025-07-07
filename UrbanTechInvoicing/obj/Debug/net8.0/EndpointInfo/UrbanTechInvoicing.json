@@ -143,17 +143,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Invoice"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -165,7 +155,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Invoice"
+                "$ref": "#/components/schemas/CreateInvoiceDto"
               }
             }
           },
@@ -767,6 +757,32 @@
   },
   "components": {
     "schemas": {
+      "CreateInvoiceDto": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "invoiceDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/InvoiceStatus"
+          },
+          "invoiceTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Customer": {
         "required": [
           "emailAddress",
@@ -802,7 +818,6 @@
         "required": [
           "dueDate",
           "invoiceDate",
-          "invoiceNumber",
           "invoiceTotal",
           "status"
         ],

@@ -1,5 +1,7 @@
-﻿using UrbanTechInvoicing.Models;
+﻿using Microsoft.AspNetCore.Http;
+using UrbanTechInvoicing.Dtos;
 using UrbanTechInvoicing.Interfaces;
+using UrbanTechInvoicing.Models;
 
 namespace UrbanTechInvoicing.Endpoints
 {
@@ -7,26 +9,52 @@ namespace UrbanTechInvoicing.Endpoints
     {
         public static void MapInvoiceEndpoints(this IEndpointRouteBuilder routes)
         {
-            routes.MapGet("/invoices", async (IInvoiceService invoiceService) =>
+            routes.MapGet("/invoices", async (HttpContext httpcontext, IInvoiceService invoiceService) =>
             {
-                return await invoiceService.GetAllInvoicesAsync();
-            });
+                var userId = httpcontext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Results.Unauthorized();
+                }
+                var invoices = await invoiceService.GetInvoiceByCreatorUserIdAsync(userId);
+                return Results.Ok(invoices);
+            })
+                .RequireAuthorization();
 
             routes.MapGet("/invoices/{InvoiceId}", async (Guid InvoiceId, IInvoiceService invoiceService) =>
             {
                 var invoice = await invoiceService.GetInvoiceByIdAsync(InvoiceId);
                 return invoice is not null ? Results.Ok(invoice) : Results.NotFound();
-            });
+            })
+                .RequireAuthorization();
 
-            routes.MapPost("/invoices", async (Invoice invoice, IInvoiceService invoiceService) =>
+            routes.MapPost("/invoices", async (HttpContext httpContext, CreateInvoiceDto dto,  IInvoiceService invoiceService) =>
             {
-                if (invoice is null)
+                var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userId))
                 {
-                    return Results.BadRequest("Invoice cannot be null.");
+                    return Results.Unauthorized();
                 }
-                await invoiceService.CreateInvoiceAsync(invoice);
-                return Results.Created($"/invoices/{invoice.InvoiceId}", invoice);
-            });
+                if (dto is null)
+                {
+                    return Results.BadRequest("Invoice data cannot be null.");
+                }
+
+                var invoice = new Invoice
+                {
+                    CreatorUserId = userId,
+                    CustomerId = dto.CustomerId,
+                    InvoiceDate = dto.InvoiceDate,
+                    DueDate = dto.DueDate,
+                    Status = dto.Status,
+                    InvoiceTotal = dto.InvoiceTotal
+                };
+
+                var invoiceDto = await invoiceService.CreateInvoiceWithDtoAsync(invoice, userId);
+                return Results.Created($"/invoices/{invoiceDto.InvoiceId}", invoiceDto);
+            })
+                .RequireAuthorization();
 
             routes.MapPut("/invoices/{InvoiceId}", async (Guid InvoiceId, Invoice invoice, IInvoiceService invoiceService) =>
             {
@@ -41,7 +69,8 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await invoiceService.UpdateInvoiceAsync(InvoiceId, invoice);
                 return Results.Ok(existingInvoice);
-            });
+            })
+                .RequireAuthorization();
 
             routes.MapDelete("/invoices/{InvoiceId}", async (Guid InvoiceId, IInvoiceService invoiceService) =>
             {
@@ -52,12 +81,14 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await invoiceService.DeleteInvoiceAsync(InvoiceId);
                 return Results.NoContent();
-            });
+            })
+                .RequireAuthorization();
 
             routes.MapGet("/invoices/total", async (IInvoiceService invoiceService) =>
             {
                 return Results.Ok(await invoiceService.GetTotalInvoicesAsync());
-            });
+            })
+                .RequireAuthorization();
 
             // Add products to an invoice
             routes.MapPost("/invoices/{InvoiceId}/products", async (
@@ -89,7 +120,8 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await invoiceService.UpdateInvoiceAsync(InvoiceId, invoice);
                 return Results.Ok(invoice);
-            });
+            })
+                .RequireAuthorization();
 
             // Add services to an invoice
             routes.MapPost("/invoices/{InvoiceId}/services", async (
@@ -121,7 +153,8 @@ namespace UrbanTechInvoicing.Endpoints
                 }
                 await invoiceService.UpdateInvoiceAsync(InvoiceId, invoice);
                 return Results.Ok(invoice);
-            });
+            })
+                .RequireAuthorization();
 
             // Add invoice payments to an invoice and update invoice payment status
             routes.MapPost("/invoices/{InvoiceId}/payments", async (
@@ -142,7 +175,8 @@ namespace UrbanTechInvoicing.Endpoints
                 invoice.InvoicePayments.Add(payment);
                 await invoiceService.UpdateInvoicePaymentAsync(InvoiceId, payment);
                 return Results.Ok(invoice);
-            });
+            })
+                .RequireAuthorization();
         }
     }
 }

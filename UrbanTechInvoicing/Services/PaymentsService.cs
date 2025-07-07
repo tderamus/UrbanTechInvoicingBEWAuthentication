@@ -59,17 +59,3 @@ namespace UrbanTechInvoicing.Services
         }
     }
 }
-
-
-
-
-
-//if (existingPayment == null)
-//{
-//    return (Payments)Results.BadRequest("Payment cannot be null.");
-//}
-
-//if (payment == null)
-//{
-//    return false;
-//}

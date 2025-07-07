@@ -1,5 +1,6 @@
 ﻿using UrbanTechInvoicing.Models;
 using UrbanTechInvoicing.Data;
+using UrbanTechInvoicing.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 using UrbanTechInvoicing.Interfaces;
@@ -46,6 +47,27 @@ namespace UrbanTechInvoicing.Repositories
             return invoice;
         }
 
+        public async Task<IEnumerable<Invoice>> GetInvoiceByCreatorUserIdAsync(string CreatorUserId)
+        {
+            var invocie = await _context.Invoices
+                .AsNoTracking()
+                .Where(i => i.CreatorUserId == CreatorUserId)
+                .Include(i => i.Customer)
+                .Include(i => i.InvoicePayments)
+                    .ThenInclude(ip => ip.Payment)
+                .Include(i => i.InvoiceServices)
+                    .ThenInclude(ins => ins.Service)
+                .Include(i => i.InvoiceProducts)
+                    .ThenInclude(ip => ip.Product)
+                .ToListAsync();
+
+            if (invocie == null || !invocie.Any())
+                {
+                throw new InvalidOperationException($"No invoices found for user {CreatorUserId}.");
+            }
+            return invocie;
+        }
+
         public async Task<Invoice> CreateInvoiceAsync(Invoice invoice)
         {
             var result = await _context.Invoices.AddAsync(invoice);
@@ -56,6 +78,36 @@ namespace UrbanTechInvoicing.Repositories
             }
 
             throw new InvalidOperationException("Failed to create invoice.");
+        }
+
+        public async Task<InvoiceDto> CreateInvoiceWithDtoAsync(CreateInvoiceDto invoiceDto)
+        {
+            var invoice = new Invoice
+            {
+                InvoiceId = Guid.NewGuid(),
+                InvoiceDate = invoiceDto.InvoiceDate,
+                DueDate = invoiceDto.DueDate,
+                InvoiceTotal = invoiceDto.InvoiceTotal,
+                Status = invoiceDto.Status,
+                CustomerId = invoiceDto.CustomerId,
+            };
+            var result = await _context.Invoices.AddAsync(invoice);
+            if (result.State == EntityState.Added)
+            {
+                await _context.SaveChangesAsync();
+                return new InvoiceDto
+                (
+                    invoice.InvoiceId,
+                    invoice.CreatorUserId ?? string.Empty,
+                    invoice.InvoiceNumber,
+                    invoice.CustomerId ?? Guid.Empty,
+                    invoice.InvoiceDate,
+                    invoice.DueDate,
+                    invoice.Status,
+                    invoice.InvoiceTotal
+                );
+            }
+            throw new InvalidOperationException("Failed to create invoice with DTO.");
         }
 
         public async Task<Invoice> UpdateInvoiceAsync(Guid InvoiceId, Invoice updatedInvoice)
