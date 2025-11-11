@@ -13,7 +13,7 @@ public static class AuthEndpoints
     {
         routes.MapPost("/register", async (
         UserManager<IdentityUser> userManager,
-        RegisterRequest request) =>
+        [FromBody] RegisterRequest request) =>
         {
             var user = new IdentityUser { UserName = request.Email, Email = request.Email };
             var result = await userManager.CreateAsync(user, request.Password);

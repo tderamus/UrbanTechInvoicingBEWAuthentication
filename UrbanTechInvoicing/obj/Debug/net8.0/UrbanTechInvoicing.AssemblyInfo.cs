@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UrbanTechInvoicing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25bacfa1b9452688e6e798d9bd77ba0a233f19ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9ed9622c4d223cdb70d87ad6d48a57c13628c56")]
 [assembly: System.Reflection.AssemblyProductAttribute("UrbanTechInvoicing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UrbanTechInvoicing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
